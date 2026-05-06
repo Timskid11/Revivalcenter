@@ -213,6 +213,17 @@ h1, h2, h3, h4, h5, .serif { font-family: 'Playfair Display', serif; font-weight
   .section{padding:56px 20px!important}
   .section-alt{padding:56px 20px!important}
 
+  /* Add this rule to hide the button on mobile/tablet */
+   .header-contact-btn { 
+  display: block; 
+}
+
+   @media(max-width: 1024px) {
+   .header-contact-btn { 
+    display: none !important; 
+  }
+}
+  
   /* Hero section */
   .hero-main-grid{grid-template-columns:1fr!important}
   .hero-image-col{min-height:320px!important;order:-1}
@@ -554,7 +565,8 @@ const Navbar = memo(({ page, setPage }) => {
             ))}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <button onClick={() => go('contact')} className="btn-primary" style={{ padding: '10px 24px', fontSize: 12 }}>Contact Us</button>
+            <button onClick={() => go('contact')} className="btn-primary header-contact-btn" style={{ padding: '10px 24px', fontSize: 12 }}>Contact Us</button>
+
             <button className="mobile-menu-btn" onClick={() => setOpen(true)}
               style={{ background: 'none', border: `2px solid var(--text-dark)`, borderRadius: 6, padding: "10px 14px", color: 'var(--text-dark)', fontSize: 13, fontWeight: 800, textTransform: 'uppercase', display: 'none' }}>
               Menu
