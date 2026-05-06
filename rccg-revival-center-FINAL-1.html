@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCCG Revival Center Texas</title>
+
+<link rel="icon" href="./logo.png" type="image/png">
+
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ── BASE RESET & FIGMA CSS VARIABLES ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue-dark: #070B34;    
+  --blue-royal: #1A2B6D;   
+  --blue-bright: #2563EB;  
+  --magenta: #B800E6;      
+  --magenta-light: #E000FF;
+  --neon: #B4F817;         
+  --red: #E60000;          
+  --orange: #E8560A;       
+  --white: #FFFFFF;
+  --off-white: #F8FAFC;
+  --gray: #64748B;
+  --text-dark: #0F172A;
+  --border: #E2E8F0;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--white);
+  color: var(--text-dark);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--blue-royal); border-radius: 4px; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fade-up { animation: fadeUp .7s ease both; }
+
+h1, h2, h3, h4, h5, .serif { font-family: 'Playfair Display', serif; font-weight: 900; letter-spacing: -0.02em; }
+
+/* ── BUTTONS ── */
+.btn-magenta { background: linear-gradient(90deg, var(--magenta), var(--magenta-light)); color: #fff; border: none; border-radius: 8px; padding: 16px 36px; font-size: 14px; font-weight: 800; letter-spacing: .05em; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; }
+.btn-magenta:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(184, 0, 230, 0.3); }
+
+.btn-secondary { background: transparent; color: var(--blue-royal); border: 2px solid var(--blue-royal); border-radius: 8px; padding: 14px 34px; font-size: 14px; font-weight: 800; letter-spacing: .05em; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; text-transform: uppercase; }
+.btn-secondary:hover { background: var(--blue-royal); color: #fff; }
+
+.btn-white { background: #fff; color: var(--blue-royal); border: none; border-radius: 8px; padding: 16px 36px; font-size: 14px; font-weight: 800; letter-spacing: .05em; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; text-transform: uppercase; }
+.btn-white:hover { background: var(--off-white); transform: translateY(-2px); }
+
+.btn-neon { background: var(--neon); color: var(--blue-dark); border: none; border-radius: 4px; padding: 16px 32px; font-size: 15px; font-weight: 900; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; }
+.btn-neon:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(180, 248, 23, 0.3); }
+
+.btn-red { background: var(--red); color: #fff; border: none; border-radius: 6px; padding: 12px 28px; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
+.btn-red:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(230, 0, 0, 0.3); }
+
+.btn-blue-small { background: var(--blue-royal); color: var(--white); border: none; border-radius: 4px; padding: 10px 20px; font-size: 12px; font-weight: 800; cursor: pointer; transition: background 0.2s; text-transform: uppercase; }
+.btn-blue-small:hover { background: var(--blue-bright); }
+
+/* ── CARDS & COMPONENTS ── */
+.card { background: #fff; border: 1px solid var(--border); border-radius: 12px; transition: all .2s; }
+.card:hover { border-color: rgba(37,99,235,0.4); box-shadow: 0 12px 40px rgba(26,43,109,0.08); transform: translateY(-3px); }
+
+.section { padding: 100px 32px; }
+.section-alt { padding: 100px 32px; background: var(--off-white); }
+.container { max-width: 1400px; margin: 0 auto; }
+
+.tag { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-light); color: var(--blue-bright); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 6px 14px; border-radius: 4px; }
+.tag-magenta { background: rgba(184, 0, 230, 0.1); color: var(--magenta); }
+.tag-orange { background: rgba(232, 86, 10, 0.1); color: var(--orange); }
+
+.spinner { width: 32px; height: 32px; border: 3px solid var(--blue-light); border-top-color: var(--magenta); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+
+/* ── ADDITIONAL RESPONSIVE FIXES ── */
+
+/* Sermon grid responsive */
+.sermon-auto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px; }
+@media(max-width:768px){ .sermon-auto-grid { grid-template-columns: 1fr; gap: 32px; } }
+@media(max-width:480px){ .sermon-auto-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+/* Give cards responsive */
+.give-cards-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media(max-width:640px){ .give-cards-inner { grid-template-columns: 1fr; gap: 16px; } }
+
+/* Socials platforms */
+.social-platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+@media(max-width:480px){ .social-platform-grid { grid-template-columns: 1fr; } }
+
+/* Button groups */
+.btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+@media(max-width:480px){ 
+  .btn-group { flex-direction: column; }
+  .btn-group button, .btn-group a { width: 100%; justify-content: center; }
+}
+
+/* Nav height on mobile */
+@media(max-width:768px){
+  nav > div { height: 70px !important; }
+  section[style*="paddingTop: '160px'"] { padding-top: 100px !important; }
+  section[style*="paddingTop: '140px'"] { padding-top: 100px !important; }
+}
+
+/* Text clamping improvements */
+@media(max-width:768px){
+  .serif { letter-spacing: -0.02em; }
+}
+
+/* Footer responsive */
+@media(max-width:768px){
+  footer { padding: 56px 20px 32px !important; }
+  footer .container > div:first-child { grid-template-columns: 1fr !important; gap: 40px !important; }
+  footer .container > div:last-child { flex-direction: column !important; gap: 8px !important; }
+}
+
+/* Worldwide page year number */
+@media(max-width:480px){
+  .worldwide-year { font-size: 64px !important; }
+}
+
+/* Beliefs page */
+@media(max-width:768px){
+  .beliefs-panel { grid-template-columns: 1fr !important; }
+  .beliefs-text-col { padding-top: 80px !important; }
+}
+
+/* Pastors page */
+@media(max-width:768px){
+  .pastors-hero { grid-template-columns: 1fr !important; }
+  .pastor-card { grid-template-columns: 1fr !important; }
+}
+
+/* Give page dark section */
+@media(max-width:768px){
+  .give-dark-section { padding: 80px 20px !important; }
+  .give-main-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+}
+
+/* Contact */
+@media(max-width:768px){
+  .contact-section { padding: 80px 20px !important; }
+}
+
+/* Events */
+@media(max-width:768px){
+  .events-section { padding-top: 100px !important; padding-left: 20px !important; padding-right: 20px !important; }
+}
+
+/* Visit page */
+@media(max-width:768px){
+  .visit-section { padding: 80px 20px !important; }
+}
+.nav-item { position: relative; display: flex; align-items: center; height: 90px; }
+.nav-link { position: relative; font-weight: 800; font-size: 13px; color: var(--text-dark); transition: color .2s; padding: 4px 0; background: none; border: none; cursor: pointer; letter-spacing: .05em; text-transform: uppercase; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--blue-royal); transition: width .25s; }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link:hover, .nav-link.active { color: var(--blue-royal); }
+
+.dropdown-menu { position: absolute; top: 100%; left: -16px; min-width: 240px; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 12px 40px rgba(26, 43, 109, 0.08); opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.25s ease; padding: 8px 0; z-index: 400; }
+.nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-item { display: block; width: 100%; text-align: left; padding: 14px 24px; background: none; border: none; font-size: 13px; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+.dropdown-item:hover { background: var(--off-white); color: var(--blue-royal); padding-left: 28px; }
+
+/* ── SPECIAL BACKGROUNDS ── */
+.stairs-bg {
+  background: linear-gradient(135deg, rgba(84,104,255,0.95) 0%, rgba(26,43,109,0.95) 100%), 
+              url('https://images.unsplash.com/photo-1505069355416-015842831b14?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  background-blend-mode: multiply;
+}
+.hero-gradient { background: var(--white); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .desktop-nav{display:none!important}
+  .mobile-menu-btn{display:flex!important}
+}
+@media(min-width:1024px){
+  .mobile-menu-btn{display:none!important}
+}
+
+/* ── TABLET (768px – 1024px) ── */
+@media(max-width:1024px){
+  .container{padding-left:24px!important;padding-right:24px!important}
+  .section{padding:72px 24px!important}
+  .section-alt{padding:72px 24px!important}
+}
+
+/* ── MOBILE (≤ 768px) ── */
+@media(max-width:768px){
+  /* Global spacing */
+  .container{padding-left:20px!important;padding-right:20px!important}
+  .section{padding:56px 20px!important}
+  .section-alt{padding:56px 20px!important}
+
+  /* Hero section */
+  .hero-main-grid{grid-template-columns:1fr!important}
+  .hero-image-col{min-height:320px!important;order:-1}
+  .hero-text-col{padding:48px 20px 40px!important}
+
+  /* Headings */
+  h1{font-size:clamp(36px,9vw,56px)!important}
+  h2{font-size:clamp(28px,7vw,44px)!important}
+  h3{font-size:clamp(22px,6vw,32px)!important}
+
+  /* Buttons */
+  .btn-magenta,.btn-secondary,.btn-white,.btn-neon,.btn-red{
+    width:100%!important;
+    justify-content:center!important;
+    padding:16px 20px!important
+  }
+  .btn-flex-row{flex-direction:column!important;align-items:stretch!important}
+  .btn-flex-row .btn-magenta,
+  .btn-flex-row .btn-secondary,
+  .btn-flex-row .btn-neon,
+  .btn-flex-row .btn-white{width:100%!important}
+
+  /* Navbar */
+  nav .container{padding:0 20px!important}
+
+  /* Cards */
+  .card{border-radius:8px!important}
+
+  /* Grids - force single column */
+  .mobile-col-1{grid-template-columns:1fr!important}
+
+  /* Events */
+  .event-row{grid-template-columns:1fr!important;padding:28px 0!important}
+  .event-date-col{border-right:none!important;padding-right:0!important;border-bottom:1px solid var(--border);padding-bottom:16px!important;margin-bottom:8px!important}
+
+  /* Sermons */
+  .sermon-grid{grid-template-columns:1fr!important}
+
+  /* Give */
+  .give-grid{grid-template-columns:1fr!important}
+
+  /* Contact */
+  .contact-grid{grid-template-columns:1fr!important}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr!important;gap:40px!important}
+
+  /* Socials */
+  .socials-grid{grid-template-columns:1fr!important}
+
+  /* About */
+  .about-grid{grid-template-columns:1fr!important}
+  .pastors-grid{grid-template-columns:1fr!important}
+
+  /* Visit */
+  .visit-grid{grid-template-columns:1fr!important}
+
+  /* World grid */
+  .world-grid{grid-template-columns:1fr!important}
+
+  /* Beliefs grid */
+  .beliefs-grid{grid-template-columns:1fr!important}
+
+  /* Home features */
+  .home-features-grid{grid-template-columns:1fr 1fr!important}
+
+  /* Stats row */
+  .stats-row{flex-direction:column!important;align-items:flex-start!important;gap:24px!important}
+
+  /* Service time block */
+  .service-time-block{border-left:none!important;padding-left:0!important;text-align:left!important;border-top:1px solid var(--border);padding-top:24px!important}
+
+  /* Give header */
+  .give-header{grid-template-columns:1fr!important}
+  .give-header-border{border-right:none!important;padding-right:0!important}
+
+  /* Worldwide year */
+  .worldwide-year{font-size:72px!important}
+
+  /* Socials platform cards */
+  .platform-cards{grid-template-columns:1fr 1fr!important}
+
+  /* Popup reminder */
+  .event-reminder{right:12px!important;left:12px!important;bottom:16px!important;max-width:none!important}
+
+  /* Image aspect ratio fix */
+  .pastor-img-col{min-height:280px!important}
+  /* Worldwide border fix */
+  .worldwide-border-right{border-right:none!important;padding-right:0!important}
+}
+
+/* ── SMALL MOBILE (≤ 480px) ── */
+@media(max-width:480px){
+  .home-features-grid{grid-template-columns:1fr!important}
+  .platform-cards{grid-template-columns:1fr!important}
+  .sermon-grid{grid-template-columns:1fr!important}
+  .give-cards-grid{grid-template-columns:1fr!important}
+  .beliefs-grid{grid-template-columns:1fr!important}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useCallback, memo, Fragment } = React;
+
+// ─── CONFIG & DATA (YOUR REAL KEYS) ─────────────────────────────────────────
+const FORMSPREE_ID = "xqenlekg"; 
+const YOUTUBE_CHANNEL_ID = "UCro161-C4FkHbjJkPSyMh-Q"; 
+const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@RCCGRevivalCenterDallasTX";
+const INSTAGRAM_HANDLE = "revivalcentertexas";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61576666061879";
+const TIKTOK_URL = "https://www.tiktok.com/@rccgrevivalcentertexas";
+const MAPS_URL = "https://www.google.com/maps/dir/?api=1&destination=351+Market+Center+Dr,+Terrell,+TX+75160";
+
+const ADDRESS = "351 Market Center Dr, Terrell, TX 75160";
+const PHONE = "+1-734-545-5493";
+const EMAIL = "revivalcentertexas@gmail.com";
+const ZOOM_ID = "818 0873 5923";
+const ZOOM_PASS = "revival";
+
+// THESE POINT TO YOUR LOCAL VSCODE FILES
+const MAIN_LOGO = "./logo-header.png";
+const PASTOR_SAMUEL_HOME = "./pastor-samuel-home.png"; 
+const PASTOR_SAMUEL_PROFILE = "./pastor-samuel-profile.png"; 
+const PASTOR_OLUWATOBI_PROFILE = "./pastor-oluwatobi-profile.png";
+
+const FALLBACK_VIDEOS = [
+  {id:"M79OObkmp50",title:"The Rain of Holy Fire",date:"2026-04-26",category:"Revival"},
+  {id:"f0sXb3WBVFM",title:"The Power of Speaking God's Word in Faith",date:"2026-04-19",category:"Sunday School"},
+  {id:"AlkiOCP5Mhg",title:"Who You Are in Christ",date:"2026-04-12",category:"Sunday School"},
+  {id:"LEnF7OZolwA",title:"Nehemiah: Fulfilling Purpose Amid Opposition",date:"2026-04-05",category:"Sermon"},
+];
+
+const BELIEFS = [
+  {title:"The Holy Bible",body:"We believe the entire Bible, both Old and New Testaments, is the written and revealed Word of God. It is infallible, inspired, authoritative, and the supreme standard for faith and conduct."},
+  {title:"The Trinity",body:"We believe in one true God who eternally exists in three divine persons: God the Father, God the Son, and God the Holy Spirit. He is one God in Trinity and Trinity in Unity."},
+  {title:"Jesus Christ",body:"We believe Jesus Christ is the only begotten Son of God. He was conceived by the Holy Spirit, born of the Virgin Mary, lived a sinless life, died as an atoning sacrifice for sin, rose on the third day, ascended into heaven, and now intercedes for us."},
+  {title:"Salvation",body:"We believe all people need salvation. Salvation is God's gift of grace through faith in Jesus Christ and is received through repentance and confession of Jesus as Lord and Savior."},
+  {title:"The Holy Spirit",body:"We believe the Holy Spirit dwells in believers, teaches, comforts, empowers for service and holy living, and works through spiritual gifts and fruit in the Church."},
+  {title:"Water Baptism",body:"We practice water baptism by immersion in the name of the Father, Son, and Holy Spirit as an outward symbol of inward transformation in Christ."},
+  {title:"Sanctification and Holiness",body:"We believe sanctification begins at the new birth and continues as a progressive work of grace. God calls believers to holy living through the power of the Holy Spirit."},
+  {title:"Divine Healing",body:"We believe divine healing is provided through the redemptive work of Christ. We pray for the sick and trust in God's power to heal according to His will."},
+  {title:"The Second Coming and Eternity",body:"We believe in the visible return of Jesus Christ, the resurrection of the dead, and eternal life for the righteous."}
+];
+
+const GIVING = [
+  {label:"Zelle",value:EMAIL},
+  {label:"Bank of America",value:"488134628967"},
+  {label:"Routing (paper)",value:"111000025"},
+  {label:"Routing (electronic)",value:"026009593"},
+  {label:"SWIFT",value:"BOFAUS3N"},
+];
+
+const SOCIAL_LINKS = [
+  {name:"YouTube",url:YOUTUBE_CHANNEL_URL,icon:"▶",color:"#FF0000",desc:"Watch sermons, Sunday School & revival messages"},
+  {name:"Instagram",url:`https://www.instagram.com/${INSTAGRAM_HANDLE}/`,icon:"◻",color:"#E1306C",desc:"Service updates, announcements & church moments"},
+  {name:"Facebook",url:FACEBOOK_URL,icon:"f",color:"#1877F2",desc:"Community updates, events & live streams"},
+  {name:"TikTok",url:TIKTOK_URL,icon:"♪",color:"#000000",desc:"Short clips, worship moments & church highlights"},
+];
+
+const NAV = [
+  {id:"home",label:"Home"},
+  {
+    id:"about_menu",
+    label:"The Church", 
+    dropdown: [
+      {id:"about", label:"Our Story"},
+      {id:"pastors", label:"Leadership"},
+      {id:"worldwide", label:"RCCG Worldwide"},
+      {id:"beliefs", label:"Beliefs"}
+    ]
+  },
+  {id:"visit",label:"I'm New"},
+  {id:"events",label:"Events"},
+  {id:"sermons",label:"Sermons"},
+  {id:"give",label:"Give"},
+  {id:"socials",label:"Socials"}
+];
+
+// ─── UTILS ─────────────────────────────────────────────────────────────────
+function formatDate(d){
+  try{return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+  catch{return d;}
+}
+
+function getNextEventDate(targetDayOfWeek, serviceHourOfDay) {
+  const now = new Date();
+  const currentDay = now.getDay();
+  let daysUntil = (targetDayOfWeek - currentDay + 7) % 7;
+  if (daysUntil === 0 && now.getHours() >= serviceHourOfDay) daysUntil = 7;
+  const nextDate = new Date(now);
+  nextDate.setDate(now.getDate() + daysUntil);
+  return nextDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function getNextFirstFriday(serviceHourOfDay = 22) {
+  const now = new Date();
+  let year = now.getFullYear();
+  let month = now.getMonth();
+  function getFirstFriday(y, m) {
+    const d = new Date(y, m, 1);
+    const day = d.getDay();
+    const offset = (5 - day + 7) % 7;
+    d.setDate(1 + offset);
+    return d;
+  }
+  let ff = getFirstFriday(year, month);
+  if (now.getDate() > ff.getDate() || (now.getDate() === ff.getDate() && now.getHours() >= serviceHourOfDay)) {
+    if (month === 11) { month = 0; year++; } else { month++; }
+    ff = getFirstFriday(year, month);
+  }
+  return ff.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// ─── REUSABLE COMPONENTS ───────────────────────────────────────────────────
+
+function BrandLogo({ light = false }) {
+  const textColor = light ? 'var(--white)' : 'var(--blue-royal)';
+  const subTextColor = light ? 'rgba(255,255,255,0.7)' : 'var(--gray)';
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <img src={MAIN_LOGO} alt="RCCG Logo" style={{ height: '48px', width: 'auto', display: 'block' }} 
+        onError={(e) => {
+          e.target.style.display = 'none';
+          e.target.parentElement.innerHTML = `<div style="background:var(--blue-bright); width:48px; height:48px; border-radius:50%; display:flex; justify-content:center; align-items:center; border:2px solid var(--white);"><svg width="24" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 16 6 16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10C8 6 12 2 12 2Z" fill="#FF5A00"/><path d="M12 11C14 11 18 13 18 16C18 18 15 19 12 19C9 19 6 18 6 16C6 13 10 11 12 11Z" fill="#FFFFFF"/></svg></div>`;
+        }}
+      />
+      <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+        <div style={{ fontSize: '18px', fontWeight: '900', color: textColor, lineHeight: '1', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: "'Playfair Display', serif" }}>
+          RCCG <span style={{ fontSize: '12px', fontWeight: '700', color: light ? 'var(--white)' : 'var(--text-dark)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>REVIVAL CENTER</span>
+        </div>
+        <div style={{ fontSize: '9px', fontWeight: '700', color: subTextColor, textTransform: 'uppercase', marginTop: '4px', letterSpacing: '0.05em' }}>
+          God's Purpose and His Fire
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Eyebrow({children, center=false}){
+  return(
+    <div style={{marginBottom:16,textAlign:center?'center':'left'}}>
+      <span style={{fontSize:13,fontWeight:800,letterSpacing:'0.15em',textTransform:'uppercase',color:'var(--magenta)'}}>{children}</span>
+    </div>
+  );
+}
+
+function CopyBtn({value}){
+  const [copied,setCopied]=useState(false);
+  return(
+    <button onClick={async()=>{try{await navigator.clipboard.writeText(value);}catch(_){}setCopied(true);setTimeout(()=>setCopied(false),1800);}}
+      style={{border:'1px solid var(--border)',color:copied?'#16a34a':'var(--blue-bright)',background:copied?'#f0fdf4':'transparent',borderRadius:6,padding:'6px 16px',fontSize:12,fontWeight:700,cursor:'pointer',whiteSpace:'nowrap',transition:'all .2s'}}>
+      {copied?'✓ Copied':'Copy'}
+    </button>
+  );
+}
+
+const MenuArrow = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" opacity="0.5">
+    <path d="M1.99974 13.0001L1.9996 11.0002L18.1715 11.0002L14.2218 7.05044L15.636 5.63623L22 12.0002L15.636 18.3642L14.2218 16.9499L18.1716 13.0002L1.99974 13.0001Z"></path>
+  </svg>
+);
+
+// Global pop-up reminder
+function GlobalEventReminder({ setPage }) {
+  const [visible, setVisible] = useState(false);
+  const [closed, setClosed] = useState(false);
+
+  useEffect(() => {
+    if(closed) return;
+    const timer = setTimeout(() => setVisible(true), 2500);
+    return () => clearTimeout(timer);
+  }, [closed]);
+
+  if (!visible || closed) return null;
+
+  return (
+    <div className="card event-reminder" style={{
+      position: 'fixed', bottom: 32, right: 32, zIndex: 1000, padding: 24, maxWidth: 340,
+      animation: 'slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1)', borderLeft: '4px solid var(--magenta)'
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+        <span style={{background:'var(--blue-dark)', color:'var(--neon)', padding:'4px 10px', borderRadius:'4px', fontSize:'10px', fontWeight:800, textTransform:'uppercase'}}>Upcoming</span>
+        <button onClick={() => {setVisible(false); setClosed(true);}} style={{ background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: 'var(--gray)' }}>✕</button>
+      </div>
+      <h4 style={{ fontSize: 20, fontWeight: 900, color: 'var(--blue-royal)', marginBottom: 8, lineHeight: 1.2 }}>Holy Communion Service</h4>
+      <p style={{ fontSize: 13, color: 'var(--gray)', marginBottom: 16, lineHeight: 1.6 }}>Entering the new month in God's presence with worship, prayers, and partaking in the Holy communion.</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--blue-bright)' }}>{getNextFirstFriday(22)}</div>
+        <button onClick={() => {setPage('events'); setClosed(true); window.scrollTo(0,0);}} style={{ background: 'none', border: 'none', color: 'var(--blue-royal)', fontSize: 12, fontWeight: 700, cursor: 'pointer', textDecoration: 'underline' }}>View All →</button>
+      </div>
+    </div>
+  );
+}
+
+// ─── NAVBAR ─────────────────────────────────────────────────────────────
+const Navbar = memo(({ page, setPage }) => {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [expandedMenu, setExpandedMenu] = useState(false);
+
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  const go = useCallback((id) => { 
+    setPage(id); setOpen(false); setExpandedMenu(false); window.scrollTo({ top: 0, behavior: "smooth" }); 
+  }, [setPage]);
+
+  return (
+    <>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 300, background: scrolled ? 'rgba(255,255,255,0.98)' : 'white', backdropFilter: 'blur(12px)', borderBottom: `1px solid var(--border)`, transition: "all .3s", boxShadow: scrolled ? '0 4px 30px rgba(26,43,109,0.05)' : 'none' }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 90, padding: "0 32px" }}>
+          <button onClick={() => go("home")} style={{ background: "none", border: "none", cursor: "pointer" }}>
+            <BrandLogo />
+          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 32, height: '100%' }} className="desktop-nav">
+            {NAV.map(n => (
+              n.dropdown ? (
+                <div key={n.id} className="nav-item">
+                  <button className={`nav-link ${['about','pastors','worldwide','beliefs'].includes(page) ? 'active' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    {n.label} <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </button>
+                  <div className="dropdown-menu">
+                    {n.dropdown.map(d => (
+                      <button key={d.id} className="dropdown-item" onClick={() => go(d.id)}>{d.label}</button>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div key={n.id} className="nav-item">
+                  <button onClick={() => go(n.id)} className={`nav-link ${page === n.id ? 'active' : ''}`}>{n.label}</button>
+                </div>
+              )
+            ))}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <button onClick={() => go('contact')} className="btn-primary" style={{ padding: '10px 24px', fontSize: 12 }}>Contact Us</button>
+            <button className="mobile-menu-btn" onClick={() => setOpen(true)}
+              style={{ background: 'none', border: `2px solid var(--text-dark)`, borderRadius: 6, padding: "10px 14px", color: 'var(--text-dark)', fontSize: 13, fontWeight: 800, textTransform: 'uppercase', display: 'none' }}>
+              Menu
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* FULL-SCREEN OVERLAY MENU */}
+      <div style={{ position: "fixed", inset: 0, zIndex: 999, background: "var(--blue-dark)", color: "#fff", transform: open ? "translateY(0)" : "translateY(-100%)", transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)", overflowY: "auto", display: "flex", flexDirection: "column" }}>
+        <div style={{ padding: "24px 32px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+          <BrandLogo light={true} />
+          <button onClick={() => setOpen(false)} style={{ background: "none", border: "none", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 13, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em" }}>Close</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>
+          </button>
+        </div>
+        <div style={{ padding: "32px", flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
+          <button onClick={() => go("home")} style={{background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)'}}>Home</button>
+          <div>
+            <button onClick={() => setExpandedMenu(!expandedMenu)} style={{width:'100%', background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)', display:'flex', justifyContent:'space-between'}}>
+              The Church <span style={{fontSize:18}}>{expandedMenu ? '-' : '+'}</span>
+            </button>
+            <div style={{ maxHeight: expandedMenu ? "400px" : "0px", overflow: "hidden", transition: "max-height 0.3s ease", background: "rgba(255,255,255,0.05)" }}>
+              <div style={{ padding: "16px 24px", display:'flex', flexDirection:'column', gap:16 }}>
+                <button onClick={() => go("about")} style={{background:'none', border:'none', color:'#fff', fontSize:16, textAlign:'left'}}>Our Story</button>
+                <button onClick={() => go("pastors")} style={{background:'none', border:'none', color:'#fff', fontSize:16, textAlign:'left'}}>Leadership</button>
+                <button onClick={() => go("worldwide")} style={{background:'none', border:'none', color:'#fff', fontSize:16, textAlign:'left'}}>RCCG Worldwide</button>
+                <button onClick={() => go("beliefs")} style={{background:'none', border:'none', color:'#fff', fontSize:16, textAlign:'left'}}>Beliefs</button>
+              </div>
+            </div>
+          </div>
+          <button onClick={() => go("visit")} style={{background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)'}}>I'm New</button>
+          <button onClick={() => go("sermons")} style={{background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)'}}>Sermons</button>
+          <button onClick={() => go("events")} style={{background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)'}}>Events</button>
+          <button onClick={() => go("give")} style={{background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)'}}>Give</button>
+          <button onClick={() => go("socials")} style={{background:'none', border:'none', color:'#fff', fontSize:28, fontWeight:800, textAlign:'left', padding:'12px 0', borderBottom:'1px solid rgba(255,255,255,0.1)'}}>Socials</button>
+        </div>
+      </div>
+    </>
+  );
+});
+
+// ─── HOME PAGE ─────────────────────────────────────────────────────────────
+function HomePage({setPage}){
+  return(
+    <>
+      <div className="hero-gradient" style={{minHeight:'100vh',display:'flex',alignItems:'center',paddingTop:90,position:'relative'}}>
+        <div className="container" style={{padding:'80px 32px',width:'100%',position:'relative',zIndex:1}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'center'}}>
+            <div style={{maxWidth: 650}}>
+              <h1 className="fade-up" style={{fontSize:'clamp(40px,6vw,72px)',fontWeight:900,lineHeight:1.1,color:'var(--blue-royal)',marginBottom:24,textTransform:'uppercase'}}>
+                WELCOME TO <br/>RCCG REVIVAL <br/>CENTRE TEXAS
+              </h1>
+              <p className="fade-up" style={{fontSize:'16px',color:'var(--text-dark)',lineHeight:1.7,maxWidth:500,marginBottom:40,animationDelay:'.1s',fontWeight:500}}>
+                Joshua 1:9: "Be strong and courageous. Do not be frightened, and do not be dismayed, for the LORD your God is with you wherever you go."
+              </p>
+              <div className="fade-up" style={{animationDelay:'.2s'}}>
+                <button className="btn-magenta" onClick={()=>setPage('visit')}>GET STARTED <span style={{fontSize:18}}>▸</span></button>
+              </div>
+            </div>
+            <div style={{display:'flex',justifyContent:'center',alignItems:'flex-end',position:'relative'}}>
+              <div style={{width:'100%',maxWidth:500,zIndex:2}}>
+                <img src={PASTOR_SAMUEL_HOME} alt="Pastor Samuel Ayinde" style={{width:'100%',height:'auto',display:'block', borderRadius:'24px', objectFit:'cover', aspectRatio:'4/5'}} 
+                  onError={e=>{e.target.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80';}}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* About Us Strip */}
+      <div className="section-alt">
+        <div className="container">
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'center'}}>
+            <div>
+              <div style={{fontSize:14, fontWeight:800, color:'var(--magenta)', letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:12}}>About Us</div>
+              <h2 className="serif" style={{fontSize:'clamp(32px,4vw,48px)',color:'var(--blue-royal)',lineHeight:1.1,marginBottom:20}}>Rooted in RCCG.<br/>Focused on revival.</h2>
+              <p style={{color:'var(--gray)',lineHeight:1.9,fontSize:16,marginBottom:28,fontWeight:500}}>
+                Revival Center Texas is a parish of The Redeemed Christian Church of God. We are devoted to worship, prayer, the Word of God, discipleship, holiness, and the transforming power of the Holy Spirit.
+              </p>
+              <button className="btn-blue-outline" onClick={()=>setPage('about')}>Learn More About HGE</button>
+            </div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+              {[['✦','Holiness','Holy living as a lifestyle.'],['◉','Prayer','Prayer moves nations.'],['◈','The Word','Bible-centered teaching.'],['◎','Community','A warm family where you belong.']].map(([icon,label,desc])=>(
+                <div key={label} className="card" style={{padding:24}}>
+                  <div style={{width:40,height:40,background:'var(--blue-light)',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,color:'var(--blue-bright)',marginBottom:14}}>{icon}</div>
+                  <div style={{fontSize:14,fontWeight:800,color:'var(--blue-royal)',marginBottom:6}}>{label}</div>
+                  <div style={{fontSize:13,color:'var(--gray)',lineHeight:1.7}}>{desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <LatestSermonsStrip setPage={setPage}/>
+    </>
+  );
+}
+
+// ─── LATEST SERMONS STRIP ─────────────────────────────────────────────────
+function LatestSermonsStrip({setPage}){
+  const [videos,setVideos]=useState(FALLBACK_VIDEOS.slice(0,4));
+  useEffect(()=>{
+    const timestamp = new Date().getTime();
+    const rssUrl=`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}&_=${timestamp}`;
+    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`)
+      .then(r=>r.json())
+      .then(data=>{
+        if(data.status==='ok'&&data.items?.length){
+          let mapped=data.items.map(item=>({
+            id:item.link.split('v=')[1]?.split('&')[0]||'', title:item.title, date:item.pubDate, thumb:item.thumbnail,
+          })).filter(v=>v.id);
+          mapped.sort((a,b) => new Date(b.date) - new Date(a.date));
+          if(mapped.length) setVideos(mapped.slice(0,4));
+        }
+      }).catch(()=>{});
+  },[]);
+
+  return(
+    <div className="section" style={{ background: 'var(--blue-dark)' }}>
+      <div className="container">
+        <div style={{textAlign:'center', marginBottom:48}}>
+          <h2 style={{fontSize:'clamp(32px,4vw,56px)',fontWeight:900,color:'var(--white)',lineHeight:1.1, textTransform:'uppercase'}}>
+            Sermons & Teachings
+          </h2>
+          <p style={{color:'var(--gray)',marginTop:12,fontSize:16}}>Latest Sermons on the Word, Sanctification, Revival and Bible Study</p>
+        </div>
+        
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:24}}>
+          {videos.map((v,i)=>(
+            <a key={v.id} href={`https://youtu.be/${v.id}`} target="_blank" rel="noreferrer" style={{background:'#fff', borderRadius:'12px', overflow:'hidden', textDecoration:'none', display:'block', border:'2px solid var(--blue-bright)', transition:'transform 0.2s'}}>
+              <div style={{aspectRatio:'16/9', background:'#000', position:'relative'}}>
+                <img src={v.thumb || `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`} alt={v.title} style={{width:'100%',height:'100%',objectFit:'cover', opacity:0.8}}/>
+                <div style={{position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center'}}>
+                  <div style={{background:'var(--red)', color:'#fff', padding:'8px 24px', borderRadius:'4px', fontWeight:800, fontSize:12, textTransform:'uppercase'}}>Watch Now</div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── ABOUT PAGE ────────────────────────────────────────────────────────────
+function AboutPage({setPage}){
+  return(
+    <>
+      <div style={{paddingTop:180,paddingBottom:100,paddingLeft:32,paddingRight:32,background:'var(--off-white)',textAlign:'center',borderBottom:'1px solid var(--border)'}}>
+        <h1 className="serif" style={{fontSize:'clamp(40px,6vw,64px)',color:'var(--blue-royal)',maxWidth:900,margin:'0 auto 16px',lineHeight:1.1}}>Our Story</h1>
+        <p style={{fontSize:'clamp(16px,2vw,20px)',color:'var(--gray)',maxWidth:600,margin:'0 auto',lineHeight:1.7,fontWeight:500}}>Before you tour our site, we’d like to share a few things from our heart to yours.</p>
+      </div>
+
+      <div className="section">
+        <div className="container" style={{maxWidth: 1000}}>
+          <div style={{fontSize:18, color:'var(--text-dark)', lineHeight:1.9, display:'flex', flexDirection:'column', gap:24, marginBottom: 80}}>
+            <p>We’re thrilled that you’ve decided to get to know us! Revival Center Texas has a vision to create an atmosphere of true worship that will bring down the Glory of God in the midst of His people. Our mission is to prepare families and individuals for the second coming of our Lord and Savior - Jesus Christ.</p>
+            <p>The commandment that Jesus gives us in Matthew 22:36-40, that we should love our neighbors as ourselves, is in our every effort to reach neighbors in our immediate community, and around the world. Come and visit one of our Worship Services and/or Bible Fellowship small groups! Meet people just like you, and grow in your relationship with the Lord!</p>
+            <p><strong>Revival Center Texas is not just another Church.</strong> It is much more than that! We are a family Church, a praying Church, a learning Church, a loving Church and a listening Church. As you step inside our auditorium, you will quickly recognize our camaraderie in an environment where exuberance and passion for God and His word intertwine marvelously. We are a happy and buoyant people. Come and experience the spirit of true friendship and togetherness. We look forward to welcoming you.</p>
+          </div>
+        </div>
+      </div>
+
+      <section style={{ background: 'var(--blue-dark)', color: 'var(--white)', paddingTop: '100px', paddingBottom: '100px' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '80px', alignItems: 'center' }}>
+          <div style={{ textAlign: 'center' }}>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', lineHeight: '1.2', marginBottom: '40px' }}>
+              A personal welcome from<br/>Pastor Samuel Ayinde
+            </h2>
+            <img src={PASTOR_SAMUEL_HOME} alt="Pastor Samuel Ayinde" style={{ width: '100%', maxWidth: '300px', margin:'0 auto', borderRadius: '16px' }} 
+                 onError={e=>{e.target.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80';}}/>
+          </div>
+          <div>
+            <p style={{ fontSize: '16px', lineHeight: '1.8', marginBottom: '40px', fontWeight: '500', opacity: 0.9 }}>
+              We are glad you are here. Revival Center Texas is a place to grow in God, love people, and walk in His purpose. Here, we worship Jesus, study His Word, pray with faith, and welcome the Holy Spirit to move in our lives. Whether you are new to church, returning to God, or looking for a church family, you are welcome here. We would love to worship with you and grow together in God's presence.
+            </p>
+            <button className="btn-neon" onClick={() => {setPage('contact'); window.scrollTo(0,0);}}>
+              CONNECT WITH US
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// ─── PASTORS PAGE ──────────────────────────────────────────────────────────
+function PastorsPage() {
+  return (
+    <section style={{ paddingTop: 160, paddingBottom: 100 }} className="container">
+      <div style={{ textAlign: "center", marginBottom: 80 }}>
+        <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--magenta)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Leadership</div>
+        <h1 className="serif" style={{ fontSize: "clamp(40px, 6vw, 64px)", color: 'var(--blue-royal)', marginTop: 8 }}>Our Pastors</h1>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 64, marginBottom: 100, alignItems: "center" }}>
+        <div>
+          <img src={PASTOR_SAMUEL_PROFILE} alt="Pastor Samuel Ayinde" style={{ width: "100%", borderRadius: '24px', border: '1px solid var(--border)' }} onError={e=>{e.target.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80';}} />
+        </div>
+        <div>
+          <div style={{ display: 'inline-block', background: 'var(--blue-royal)', color: '#fff', padding: '6px 16px', borderRadius: '4px', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', marginBottom: 16 }}>Lead Pastor</div>
+          <h2 className="serif" style={{ fontSize: "40px", color: 'var(--text-dark)', marginBottom: 24, lineHeight: 1.1 }}>Samuel Ayinde</h2>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--gray)", marginBottom: 16, fontWeight: 500 }}>
+            Samuel Ayinde serves as the pastor of RCCG Revival Center Texas. He holds a PhD in Mechanical Engineering (University of Michigan, Ann Arbor) and a Graduate Certificate in Counseling plus a Doctor of Ministry (Redeemer’s University North America).
+          </p>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--gray)", fontWeight: 500 }}>
+            He serves as a pastor, Bible teacher, book writer, song writer and academic excellence teacher. He is married to Oluwatobi and they are blessed with a child.
+          </p>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 64, alignItems: "center" }}>
+        <div style={{ order: 1 }}>
+          <div style={{ display: 'inline-block', background: 'var(--blue-bright)', color: '#fff', padding: '6px 16px', borderRadius: '4px', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', marginBottom: 16 }}>Co-Pastor</div>
+          <h2 className="serif" style={{ fontSize: "40px", color: 'var(--text-dark)', marginBottom: 24, lineHeight: 1.1 }}>Oluwatobi Ayinde</h2>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--gray)", marginBottom: 16, fontWeight: 500 }}>
+            Oluwatobi Ayinde serves as the co-pastor of RCCG Revival Center Texas. She holds a Masters degree in Information Systems from Central Michigan University.
+          </p>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: "var(--gray)", fontWeight: 500 }}>
+            A senior Consultant with Deloitte, she is married to Samuel Ayinde and their marriage is blessed with a child.
+          </p>
+        </div>
+        <div style={{ order: 2 }}>
+          <img src={PASTOR_OLUWATOBI_PROFILE} alt="Co-Pastor Oluwatobi Ayinde" style={{ width: "100%", borderRadius: '24px', border: '1px solid var(--border)' }} onError={e=>{e.target.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80';}}/>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── RCCG WORLDWIDE ─────────────────────────────────────────────────────────
+function WorldwidePage() {
+  const regions = [
+    { name: "RCCG Americas", url: "https://www.rccgna.org/" },
+    { name: "RCCG Canada", url: "https://rccgcanada.org/" },
+    { name: "RCCG United Kingdom", url: "https://www.rccguk.church/" },
+    { name: "RCCG Worldwide", url: "https://www.rccg.org/" }
+  ];
+
+  return (
+    <section style={{ paddingTop: 160, paddingBottom: 100 }} className="container">
+      <div style={{ textAlign: "center", borderBottom: `1px solid var(--border)`, paddingBottom: 60, marginBottom: 80 }}>
+        <h1 className="serif" style={{ fontSize: "clamp(40px, 6vw, 64px)", color: 'var(--blue-royal)', lineHeight: 1.1 }}>RCCG Worldwide</h1>
+        <p style={{ fontSize: 18, color: "var(--gray)", maxWidth: 700, margin: "16px auto 0", fontWeight: 500 }}>
+          74 Years since founding. A global movement of faith, holiness, and revival.
+        </p>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 80 }} className="world-grid">
+        <div style={{ borderRight: '1px solid var(--border)', paddingRight: 40 }} className="worldwide-border-right">
+          <div className="serif" style={{ fontSize: "120px", fontWeight: 900, color: 'var(--magenta)', lineHeight: 0.8, marginBottom: 48, letterSpacing: "-0.05em" }}>1952</div>
+          <h3 style={{ fontSize: 20, fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 24, color: 'var(--dark)' }}>Global Network</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {regions.map(region => (
+              <a key={region.name} href={region.url} target="_blank" rel="noreferrer" style={{ border: `1px solid var(--border)`, borderRadius:'8px', padding: "16px 24px", fontSize: 15, fontWeight: 700, textTransform: "uppercase", color: 'var(--blue-royal)', display: "flex", justifyContent: "space-between", alignItems: "center", transition: "all 0.3s", textDecoration:'none' }} onMouseEnter={e => { e.currentTarget.style.background = 'var(--dark)'; e.currentTarget.style.color = '#fff'; }} onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = 'var(--blue-royal)'; }}>
+                {region.name} <span>→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="serif" style={{ fontSize: "36px", marginBottom: 24, lineHeight: 1.2, color:'var(--text-dark)' }}>How it all began</h2>
+          <div style={{ fontSize: 16, lineHeight: 1.8, color: "var(--gray)", display: "flex", flexDirection: "column", gap: 24, fontWeight: 500 }}>
+            <p>The Redeemed Christian Church of God (RCCG) is a worldwide non-denominational religious organization established in 1952. The RCCG has over 6 million members distributed in over 4,000 parishes across the continents of Africa, Europe, Asia, and America.</p>
+            <p>The global mission of the Church is to make heaven by living a life of holiness and to take as many people with us. The vision is to plant churches within ten minutes driving distance in every developed nation and within five minutes walk in every developing nation of the world.</p>
+            <p>The goal is to pursue this vision until every nation of the world is reached for Jesus Christ our Lord and Savior. Revival Center Texas is a proud parish of this global movement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── BELIEFS PAGE ──────────────────────────────────────────────────────────
+const BeliefsPage = () => {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <section className="stairs-bg" style={{ paddingTop: '140px', paddingBottom: '120px', minHeight: '100vh', color: 'var(--white)' }}>
+      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(350px,1fr))', gap: '60px' }}>
+        
+        <div style={{ paddingTop: '40px' }}>
+          <div style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '800', marginBottom: '12px' }}>Doctrinal Foundation</div>
+          <h1 style={{ fontSize: 'clamp(56px, 7vw, 96px)', fontWeight: '900', lineHeight: '0.9', marginBottom: '40px', fontFamily:"'Plus Jakarta Sans', sans-serif" }}>WHAT WE<br/>BELIEVE</h1>
+          <p style={{ fontSize: '18px', lineHeight: '1.7', marginBottom: '32px', fontWeight: '500', opacity: 0.95 }}>
+            As a parish of RCCG, Revival Center Texas fully adheres to the fundamental doctrinal beliefs of The Redeemed Christian Church of God.
+          </p>
+          <p style={{ fontSize: '15px', lineHeight: '1.7', opacity: 0.8 }}>
+            This statement of faith remains unalterable. In any question of doctrine or interpretation, the official doctrinal stance of RCCG worldwide and RCCG The Americas-1 remains final and binding for this church.
+          </p>
+        </div>
+
+        <div style={{ background: 'var(--off-white)', borderRadius: '24px', padding: '16px', color: 'var(--text-dark)', maxHeight: '750px', overflowY: 'auto', boxShadow: '0 24px 48px rgba(0,0,0,0.2)' }}>
+          {BELIEFS.map((b, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div key={i} style={{ borderBottom: i !== BELIEFS.length - 1 ? '1px solid var(--border)' : 'none', padding: '16px 24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '800', fontFamily:"'Plus Jakarta Sans', sans-serif" }}>{b.title}</h3>
+                  <button onClick={() => setOpenIndex(isOpen ? -1 : i)} className="btn-blue-small">
+                    {isOpen ? 'CLOSE' : 'OPEN'}
+                  </button>
+                </div>
+                <div style={{ maxHeight: isOpen ? '500px' : '0px', overflow: 'hidden', transition: 'max-height 0.3s ease', marginTop: isOpen ? '16px' : '0' }}>
+                  <div style={{ background: 'var(--blue-dark)', color: 'var(--white)', padding: '20px', borderRadius: '12px', fontSize: '14px', lineHeight: '1.6', fontWeight: '500' }}>
+                    {b.body}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ─── EVENTS PAGE ───────────────────────────────────────────────────────────
+const EventsPage = () => {
+  const events = [
+    { title: 'Sunday Worship', category: 'Main Service', time: '10:00 AM CST', detail: '351 Market Center Dr, Terrell, TX', nextDate: getNextEventDate(0, 14), day: 'SUN' },
+    { title: 'Bible Study', category: 'Teaching', time: '7:00 PM CST', detail: 'Online via Zoom (ID: 818 0873 5923)', nextDate: getNextEventDate(3, 20), day: 'WED' },
+    { title: 'Prayer Meeting', category: 'Intercession', time: '7:00 PM CST', detail: 'Online via Zoom (ID: 818 0873 5923)', nextDate: getNextEventDate(4, 20), day: 'THU' },
+    { title: 'Holy Ghost Service', category: 'Worship', time: '8:00 PM CST', detail: '351 Market Center Dr, Terrell, TX', nextDate: getNextFirstFriday(22), day: 'FRI' }
+  ];
+
+  return (
+    <section style={{ paddingTop: '160px', paddingBottom: '120px' }} className="container">
+      <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '40px', marginBottom: '60px' }}>
+        <h1 className="serif" style={{ fontSize: 'clamp(40px, 6vw, 64px)', lineHeight: '1.1', margin: 0, color:'var(--blue-royal)' }}>Schedule</h1>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {events.map((e, i) => (
+          <div key={i} className="event-row" style={{ display: 'grid', gridTemplateColumns: '200px 1fr auto', gap: '40px', padding: '40px 0', borderBottom: '1px solid var(--border)', alignItems: 'center' }}>
+            <div className="event-date-col" style={{ borderRight: '1px solid var(--border)', paddingRight: '20px' }}>
+              <div style={{ color: 'var(--magenta)', fontWeight: 800, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '4px' }}>{e.day}</div>
+              <div className="serif" style={{ fontSize: '40px', fontWeight: 900, color: 'var(--text-dark)', lineHeight: '1' }}>{e.nextDate.replace(', 2026', '')}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gray)', marginBottom: '8px' }}>{e.category}</div>
+              <h3 className="serif" style={{ fontSize: '28px', fontWeight: 800, marginBottom: '8px', color:'var(--blue-royal)' }}>{e.title}</h3>
+              <p style={{ fontSize: '15px', color: 'var(--gray)', fontWeight: '500' }}>{e.detail}</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
+              <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '16px' }}>{e.time}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// ─── VISIT PAGE ────────────────────────────────────────────────────────────
+const VisitPage = ({setPage}) => {
+  return (
+    <section style={{ paddingTop: '140px', paddingBottom: '120px', background: 'var(--blue-bright)', color: 'var(--white)' }}>
+      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '60px', alignItems: 'center' }}>
+        <div>
+          <div style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '16px', color: 'rgba(255,255,255,0.8)' }}>Plan Your Visit</div>
+          <h1 style={{ fontSize: 'clamp(40px, 6vw, 64px)', lineHeight: '1.1', marginBottom: '24px' }}>Everything you need for a simple, peaceful, and welcome first visit.</h1>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.9)', marginBottom: '40px', fontWeight: 500, lineHeight: 1.7 }}>
+            Whether you are returning to church or walking through the doors for the first time, you will find a place to belong, learn, and grow.
+          </p>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <button className="btn-neon" onClick={() => window.open(MAPS_URL)}>GET DIRECTION</button>
+            <button className="btn-magenta" style={{ background: 'transparent', border: '2px solid var(--white)', color: 'var(--white)' }} onClick={() => {setPage('contact'); window.scrollTo(0,0);}}>CONTACT US</button>
+          </div>
+        </div>
+        
+        <div style={{ background: 'var(--white)', borderRadius: '16px', padding: '8px', color: 'var(--text-dark)' }}>
+          <div style={{ padding: '24px', background: 'var(--blue-dark)', color: 'var(--white)', borderRadius: '8px', marginBottom: '8px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: 800 }}>Need help before you come?</h3>
+            <p style={{ fontSize: '12px', opacity: 0.8, marginTop: '4px' }}>We would love to help.</p>
+            <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+              <button className="btn-red" style={{ flex: 1, justifyContent: 'center', padding: '10px' }} onClick={() => window.open(MAPS_URL)}>Get Directions</button>
+              <button className="btn-blue-small" style={{ flex: 1, justifyContent: 'center', background: 'rgba(255,255,255,0.2)' }} onClick={() => window.open(`tel:${PHONE}`)}>Call Us</button>
+            </div>
+          </div>
+          {[
+            { q: 'What should I wear?', a: 'Come exactly as you are. You will find people in everything from jeans and t-shirts to suits and ties.' },
+            { q: 'Do I need to know anyone before I come?', a: 'Not at all! Our greeters will welcome you at the door and help you find your way around.' },
+            { q: 'Can I join during the week if I am not nearby?', a: `Absolutely. We hold online Bible Study on Wednesdays and Prayer Meetings on Thursdays via Zoom.` }
+          ].map((faq, i) => (
+            <details key={i} style={{ borderBottom: '1px solid var(--border)', padding: '16px' }}>
+              <summary style={{ fontWeight: 700, fontSize: '14px', cursor: 'pointer', outline: 'none' }}>{faq.q}</summary>
+              <p style={{ fontSize: '13px', color: 'var(--gray)', marginTop: '8px', lineHeight: 1.6 }}>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ─── SERMONS PAGE ─────────────────────────
+function SermonsPage(){
+  const [allVideos,setAllVideos]=useState(FALLBACK_VIDEOS);
+  const [loading,setLoading]=useState(true);
+  const [fetchStatus,setFetchStatus]=useState('');
+
+  useEffect(()=>{
+    let didSet = false;
+
+    // Strategy 1: rss2json (most reliable, free tier)
+    const tryRss2Json = () => {
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+      return fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=20&api_key=`)
+        .then(r => r.json())
+        .then(data => {
+          if(data.status === 'ok' && data.items?.length) {
+            const mapped = data.items.map(item => ({
+              id: item.link?.split('v=')[1]?.split('&')[0] || item.guid?.split(':').pop() || '',
+              title: item.title,
+              date: item.pubDate,
+              category: item.categories?.[0] || 'Sermon',
+              thumb: item.thumbnail || `https://img.youtube.com/vi/${item.link?.split('v=')[1]?.split('&')[0]}/mqdefault.jpg`,
+            })).filter(v => v.id && v.title);
+            mapped.sort((a,b) => new Date(b.date) - new Date(a.date));
+            if(mapped.length && !didSet) { didSet = true; setAllVideos(mapped); setFetchStatus('live'); }
+            return !!mapped.length;
+          }
+          return false;
+        });
+    };
+
+    // Strategy 2: allorigins CORS proxy to directly parse YouTube RSS
+    const tryDirectRss = () => {
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+      return fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`)
+        .then(r => r.json())
+        .then(data => {
+          if(!data.contents) return false;
+          const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
+          const entries = [...xml.querySelectorAll('entry')];
+          if(!entries.length) return false;
+          const mapped = entries.map(e => {
+            const videoId = e.querySelector('videoId')?.textContent || e.querySelector('id')?.textContent?.split(':').pop() || '';
+            return {
+              id: videoId,
+              title: e.querySelector('title')?.textContent || '',
+              date: e.querySelector('published')?.textContent || '',
+              category: 'Sermon',
+              thumb: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+            };
+          }).filter(v => v.id && v.title);
+          if(mapped.length && !didSet) { didSet = true; setAllVideos(mapped); setFetchStatus('live'); }
+          return !!mapped.length;
+        });
+    };
+
+    // Run strategies in sequence
+    tryRss2Json()
+      .then(ok => ok ? null : tryDirectRss())
+      .catch(() => tryDirectRss())
+      .catch(() => { setFetchStatus('fallback'); })
+      .finally(() => setLoading(false));
+
+    // Timeout safety — never show loading forever
+    const timeout = setTimeout(() => setLoading(false), 8000);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return(
+    <section style={{ paddingTop: '160px', paddingBottom: '120px', background: 'var(--white)' }} className="container">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderBottom: '1px solid var(--border)', paddingBottom: '40px', marginBottom: '60px', flexWrap: 'wrap', gap: '20px' }}>
+        <div>
+          <div style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--magenta)', marginBottom: '8px' }}>Sermons & Teachings</div>
+          <h1 className="serif" style={{ fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: '1.1', margin: 0, color:'var(--blue-royal)' }}>The Message</h1>
+        </div>
+        <span className="tag tag-magenta">
+          {loading ? '⏳ Fetching...' : fetchStatus === 'live' ? '🟢 Live Feed' : '📺 Sermon Archive'}
+        </span>
+      </div>
+
+      {loading ? (
+        <h2 style={{ fontSize: '24px', textAlign: 'center', padding: '100px', color: 'var(--gray)' }}>Loading videos...</h2>
+      ) : (
+        <div className="sermon-auto-grid">
+          {allVideos.slice(0, 9).map((vid, i) => {
+            const id = vid.guid ? vid.guid.split(':')[2] : vid.id;
+            const date = new Date(vid.pubDate || vid.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            return (
+              <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ aspectRatio: '16/9', background: 'var(--dark)', marginBottom: '16px', borderRadius:'12px', overflow:'hidden', border:'1px solid var(--border)' }}>
+                  <iframe src={`https://www.youtube.com/embed/${id}`} style={{ width: '100%', height: '100%', border: 'none' }} allowFullScreen></iframe>
+                </div>
+                <div style={{ fontSize: '11px', color: 'var(--magenta)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px' }}>{date}</div>
+                <h3 className="serif" style={{ fontSize: '20px', lineHeight: '1.3', fontWeight:800, color:'var(--text-dark)' }}>{vid.title}</h3>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+// ─── GIVE PAGE ─────────────────────────────────────────────────────────────
+function GivePage(){
+  return(
+    <section style={{ paddingTop: '160px', paddingBottom: '120px', background: 'var(--blue-dark)', color: 'var(--white)' }}>
+      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '80px', alignItems: 'center' }}>
+        <div>
+          <h1 className="serif" style={{ fontSize: 'clamp(40px, 6vw, 64px)', lineHeight: '1.1', marginBottom: '24px' }}>Give with Joy, Clarity, and Simplicity.</h1>
+          <p style={{ fontSize: '18px', color: 'rgba(255,255,255,0.7)', lineHeight: '1.6', fontWeight:500 }}>Your giving supports worship, discipleship, outreach, and the ongoing work of God through Revival Center Texas.</p>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {GIVING.map((m, i) => (
+            <div key={i} style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '12px', padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <h3 style={{ fontSize: '18px', fontWeight:800 }}>{m.label}</h3>
+              <span style={{ fontSize: '14px', fontWeight: '700', color: 'var(--neon)', letterSpacing: '0.05em' }}>{m.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── SOCIALS PAGE (BEHOLD.SO WIDGET INTACT) ───────────────────────────────
+function SocialsPage(){
+  useEffect(() => {
+    // Inject the Instagram Widget securely
+    const d = document, s = d.createElement("script"); 
+    s.type = "module"; s.src = "https://w.behold.so/widget.js"; 
+    d.head.append(s);
+  }, []);
+
+  return(
+    <section style={{ paddingTop: '140px', paddingBottom: '100px', background: 'var(--off-white)' }} className="container">
+      <div style={{ textAlign: "center", borderBottom: `1px solid var(--border)`, paddingBottom: 60, marginBottom: 60 }}>
+        <h1 className="serif" style={{ fontSize: "clamp(48px, 6vw, 80px)", fontWeight: 900, marginBottom: 24, color:'var(--blue-royal)' }}>Stay Connected</h1>
+        <p style={{ fontSize: 18, color: "var(--gray)", fontWeight:500 }}>Service updates, daily inspiration, and church family news.</p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 20, marginBottom: 72 }}>
+        {SOCIAL_LINKS.map(s=>(
+          <a key={s.name} href={s.url} target="_blank" rel="noreferrer" className="card" style={{padding:'32px 28px',textDecoration:'none',display:'block', textAlign:'center'}}>
+            <div style={{width:52,height:52,background:'var(--blue-light)',borderRadius:14,display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,color:'var(--blue-royal)',marginBottom:20,border:`1px solid var(--border)`, margin:'0 auto'}}>{s.icon}</div>
+            <h3 className="serif" style={{fontSize:24,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>{s.name}</h3>
+            <p style={{fontSize:13,color:'var(--gray)',lineHeight:1.7,marginBottom:20}}>{s.desc}</p>
+            <span style={{fontSize:12,fontWeight:700,color:'var(--magenta)',letterSpacing:'0.08em'}}>Follow on {s.name} →</span>
+          </a>
+        ))}
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:40}}>
+        <div>
+          <h2 className="serif" style={{ fontSize: 32, marginBottom: 32, textAlign: "center", color:'var(--blue-royal)' }}>Latest on Facebook</h2>
+          <div style={{ border: `1px solid var(--border)`, background: "#FFF", borderRadius:'16px', overflow: "hidden", boxShadow:'0 10px 30px rgba(0,0,0,0.05)' }}>
+            {/* Facebook Page Plugin — works once deployed to Hostinger with a real domain */}
+            <div id="fb-root"></div>
+            <div
+              className="fb-page"
+              data-href="https://www.facebook.com/profile.php?id=61576666061879"
+              data-tabs="timeline"
+              data-width="500"
+              data-height="600"
+              data-small-header="false"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="true"
+            />
+            {/* Friendly fallback card shown on localhost / before FB SDK loads */}
+            <div style={{ padding: 40, textAlign: 'center', minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 16 }}>
+              <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#1877F2', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, color: '#fff', flexShrink: 0 }}>f</div>
+              <div>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: 'var(--blue-royal)', marginBottom: 8 }}>RCCG Revival Center Texas</h3>
+                <p style={{ fontSize: 14, color: 'var(--gray)', lineHeight: 1.6, marginBottom: 20, maxWidth: 300 }}>
+                  Follow us on Facebook for service updates, community news, announcements and live streams.
+                </p>
+                <a href={FACEBOOK_URL} target="_blank" rel="noreferrer"
+                  style={{ background: '#1877F2', color: '#fff', border: 'none', borderRadius: 8, padding: '12px 28px', fontSize: 14, fontWeight: 700, cursor: 'pointer', display: 'inline-block', textDecoration: 'none' }}>
+                  View Facebook Page →
+                </a>
+              </div>
+              <p style={{ fontSize: 11, color: '#aaa', marginTop: 8 }}>
+                ⓘ The Facebook feed only appears on the live website domain, not in local preview.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 className="serif" style={{ fontSize: 32, marginBottom: 32, textAlign: "center", color:'var(--blue-royal)' }}>Latest on Instagram</h2>
+          <div style={{ background: "#FFF", borderRadius:'16px', padding: 24, minHeight: "600px", boxShadow:'0 10px 30px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
+            <div data-behold-id="nFaFTuUpYhehaZYIdV0W"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── CONTACT PAGE ──────────────────────────────────────────────────────────
+function ContactPage(){
+  const [form,setForm]=useState({name:'',email:'',phone:'',message:''});
+  const [errors,setErrors]=useState({});
+  const [status,setStatus]=useState('idle');
+  
+  const validate=()=>{
+    const e={};
+    if(!form.name.trim()) e.name='Name is required';
+    if(!form.email.trim()||!/\S+@\S+\.\S+/.test(form.email)) e.email='Valid email required';
+    if(!form.message.trim()) e.message='Message is required';
+    return e;
+  };
+
+  const submit = async ev => {
+    ev.preventDefault();
+    const e = validate();
+    if (Object.keys(e).length) { setErrors(e); return; }
+    setErrors({}); setStatus('loading');
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
+      if (response.ok) { setStatus('success'); setForm({name:'',email:'',phone:'',message:''}); } 
+      else { setStatus('idle'); alert("Error sending message."); }
+    } catch (err) { setStatus('idle'); alert("Network error."); }
+  };
+
+  const fieldStyle=(key)=>({background:'#fff',border:`1px solid ${errors[key]?'#DC2626':'var(--border)'}`,borderRadius:8,padding:'16px',color:'var(--text-dark)',fontSize:14,outline:'none',width:'100%',fontFamily:'inherit',transition:'border-color .2s'});
+  
+  return(
+    <section style={{ paddingTop: '160px', paddingBottom: '120px' }} className="container">
+      <div style={{textAlign:'center', marginBottom:80}}>
+        <h1 className="serif" style={{ fontSize: 'clamp(40px, 6vw, 64px)', lineHeight: '1.1', margin: '0 0 16px 0', color:'var(--blue-royal)' }}>Contact Us</h1>
+        <p style={{ fontSize: '18px', color: 'var(--gray)', fontWeight: 500 }}>Reach out any time — by phone, email, or prayer request.</p>
+      </div>
+
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64}}>
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          {[
+            {icon:'📍',label:'Address',value:ADDRESS,href:MAPS_URL},
+            {icon:'📞',label:'Phone',value:PHONE,href:`tel:${PHONE}`},
+            {icon:'✉',label:'Email',value:EMAIL,href:`mailto:${EMAIL}`},
+            {icon:'💻',label:'Online gatherings',value:`Wed & Thu · 7:00 PM CST · Zoom ${ZOOM_ID} · Pass: ${ZOOM_PASS}`},
+          ].map(c=>(
+            <div key={c.label} className="card" style={{padding:'24px',display:'flex',gap:16,alignItems:'flex-start'}}>
+              <span style={{fontSize:24}}>{c.icon}</span>
+              <div>
+                <div style={{fontSize:11,fontWeight:800,letterSpacing:'0.15em',color:'var(--magenta)',textTransform:'uppercase',marginBottom:4}}>{c.label}</div>
+                {c.href?( <a href={c.href} target="_blank" rel="noreferrer" style={{fontSize:14,color:'var(--blue-royal)',fontWeight:700}}>{c.value}</a> )
+                :( <p style={{fontSize:14,color:'var(--gray)',fontWeight:500}}>{c.value}</p> )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{background:'var(--off-white)',padding:40,borderRadius:16}}>
+          <h3 className="serif" style={{fontSize:36, marginBottom:8, color:'var(--blue)'}}>Send a message</h3>
+          <p style={{color:'var(--gray)', marginBottom:24, fontSize:14}}>Share a prayer request or ask us anything.</p>
+          {status==='success'?(
+            <div style={{textAlign:'center',padding:'40px 0'}}>
+              <div style={{fontSize:48,marginBottom:16}}>✦</div>
+              <div style={{fontSize:24,color:'var(--magenta)',marginBottom:10,fontWeight:800}}>Thank you.</div>
+              <p style={{color:'var(--gray)'}}>Your message has been received.</p>
+              <button onClick={()=>setStatus('idle')} className="btn-blue-small" style={{marginTop:24}}>Send Another</button>
+            </div>
+          ):(
+            <form onSubmit={submit} style={{display:'flex',flexDirection:'column',gap:16}}>
+              <input type="text" value={form.name} onChange={e=>setForm(p=>({...p,name:e.target.value}))} style={fieldStyle('name')} placeholder="Full Name"/>
+              <input type="email" value={form.email} onChange={e=>setForm(p=>({...p,email:e.target.value}))} style={fieldStyle('email')} placeholder="Email Address"/>
+              <textarea rows={5} value={form.message} onChange={e=>setForm(p=>({...p,message:e.target.value}))} style={{...fieldStyle('message'),resize:'vertical'}} placeholder="Your message..."/>
+              <button type="submit" className="btn-magenta" disabled={status==='loading'} style={{opacity:status==='loading'?.7:1,justifyContent:'center'}}>
+                {status==='loading'?'Sending…':'Submit Request'}
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── APP WRAPPER ──
+const App = () => {
+  const [page, setPage] = useState('home');
+  
+  const renderPage = () => {
+    switch(page) {
+      case 'about': return <AboutPage setPage={setPage} />;
+      case 'pastors': return <PastorsPage />;
+      case 'worldwide': return <WorldwidePage />;
+      case 'beliefs': return <BeliefsPage />;
+      case 'sermons': return <SermonsPage />;
+      case 'events': return <EventsPage />;
+      case 'visit': return <VisitPage setPage={setPage} />;
+      case 'give': return <GivePage />;
+      case 'contact': return <ContactPage />;
+      case 'socials': return <SocialsPage />;
+      default: return <HomePage setPage={setPage} />;
+    }
+  };
+
+  return (
+    <>
+      <GlobalEventReminder setPage={setPage} />
+      <Navbar page={page} setPage={setPage} />
+      <main>{renderPage()}</main>
+      
+      <footer style={{ background: 'var(--blue-dark)', color: 'rgba(255,255,255,0.7)', padding: '80px 40px 40px' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(250px,1fr))', gap: '64px', marginBottom: '64px' }}>
+          <div>
+            <div style={{ marginBottom: '24px' }}>
+               <BrandLogo light={true} />
+            </div>
+            <p style={{ fontSize: '14px', lineHeight: '1.8', maxWidth: '340px' }}>A Christ-centered church family devoted to worship, prayer, sound doctrine, revival, and the transforming power of the Holy Spirit.</p>
+          </div>
+          <div>
+            <div style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.15em', color: 'var(--magenta)', textTransform: 'uppercase', marginBottom: '24px' }}>Quick Links</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              {NAV.map(n => (
+                n.dropdown ? null : <button key={n.id} onClick={() => { setPage(n.id); window.scrollTo(0,0); }} style={{ background: 'none', border: 'none', textAlign: 'left', color: 'rgba(255,255,255,0.8)', fontSize: '15px', cursor: 'pointer', fontWeight: '600' }}>{n.label}</button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.15em', color: 'var(--magenta)', textTransform: 'uppercase', marginBottom: '24px' }}>Service Times</div>
+            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.9)', lineHeight: '1.8' }}>
+              <strong>Sunday Service:</strong> 10:00 AM<br/>
+              <strong>Sunday School:</strong> 9:00 AM<br/>
+              <strong>First Friday:</strong> 8:00 PM
+            </div>
+          </div>
+        </div>
+        <div className="container" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '32px', display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
+          <p>© {new Date().getFullYear()} RCCG Revival Center Texas.</p>
+          <p>God bless you.</p>
+        </div>
+      </footer>
+    </>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+<!-- Facebook Page Plugin SDK — loads after page is ready -->
+<script>
+  window.addEventListener('load', function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0';
+    s.async = true; s.defer = true; s.crossOrigin = 'anonymous';
+    d.head.appendChild(s);
+  });
+</script>
+</body>
+</html>
