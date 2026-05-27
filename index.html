@@ -185,6 +185,27 @@ details[open] .acc-icon{transform:rotate(45deg)}
   .platform-grid{grid-template-columns:1fr!important}
   .stats-strip{flex-direction:column!important;gap:24px!important}
 }
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+animation:fadeUp .8s ease forwards;
+}
+
+@keyframes fadeUp{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.card-hover{
+transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.card-hover:hover{
+transform:translateY(-6px);
+box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
 </style>
 </head>
 <body>
@@ -453,7 +474,7 @@ function HomePage({setPage}){
             <button className="btn btn-outline" onClick={()=>setPage('sermons')}>Watch Sermons</button>
           </div>
           <div className="fade-up stats-strip" style={{display:'flex',gap:40,paddingTop:40,borderTop:'1px solid var(--border)',animationDelay:'.4s',flexWrap:'wrap'}}>
-            {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Wed 7:00 PM · Online'],['Prayer','Thu 7:00 PM · Online']].map(([l,v])=>(
+            {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Tue 7:00 PM · Online'],['Prayer','Thu 7:00 PM · Online']].map(([l,v])=>(
               <div key={l}>
                 <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'var(--rust)',textTransform:'uppercase',marginBottom:5}}>{l}</div>
                 <div style={{fontSize:15,fontWeight:600,color:'var(--ink)'}}>{v}</div>
@@ -462,16 +483,7 @@ function HomePage({setPage}){
           </div>
         </div>
         
-        {/* Placeholder Building/Graphic */}
-        <div className="hero-img" style={{position:'relative',background:'var(--cream)',minHeight:'60vh',overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center'}}>
-          <div style={{position:'absolute',inset:0,background:'linear-gradient(135deg, rgba(200,75,49,0.08) 0%, rgba(26,43,109,0.08) 100%)'}}></div>
-          <div style={{width:'240px',height:'240px',borderRadius:'50%',border:'1px solid var(--border)',display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(255,255,255,0.4)',boxShadow:'0 32px 80px rgba(0,0,0,0.05)'}}>
-            <div style={{textAlign:'center'}}>
-               <p style={{fontSize:'12px',fontWeight:'800',letterSpacing:'0.2em',color:'var(--rust)',textTransform:'uppercase'}}>RCCG</p>
-               <h3 className="serif" style={{fontSize:'32px',color:'var(--ink)',marginTop:'8px'}}>Worship<br/>With Us</h3>
-            </div>
-          </div>
-        </div>
+        
       </section>
 
       {/* ABOUT STRIP */}
@@ -943,13 +955,25 @@ function BeliefsPage(){
    VISIT / I'M NEW
 ════════════════════════════════════════════════════ */
 function VisitPage({setPage}){
-  const faq = [
-    {q: 'What should I wear?', a: 'Come in modest and comfortable attire. We want you to feel at ease when you worship with us.'},
-    {q: 'Do I need to know anyone before I come?', a: 'No. You can come as you are. We will be glad to welcome you and help you feel at home.'},
-    {q: 'Can I join during the week if I am not nearby?', a: 'Yes. Bible Study and Prayer Meeting are held online on Wednesdays and Thursdays at 7:00 PM CST using Zoom.'},
-    {q: 'Is there a place for children and families?', a: 'Yes. We have a Children department and would be glad to guide you further when you contact or visit us.'},
-    {q: 'What if I have questions before arriving?', a: 'You can call, email, or send a prayer request through the website. We would love to help before you come.'}
-  ];
+    
+    const faq = [
+  { 
+    q: 'What can I expect during a Sunday service?', 
+    a: 'You can expect a warm, spirit-filled atmosphere with heartfelt worship and a message focused on the power and purpose of God’s Word.' 
+  },
+  { 
+    q: 'Are your midweek services online?', 
+    a: 'Yes. We host our Bible Study every Tuesday and our Prayer Meeting every Thursday, both via Zoom at 7:00 PM CST.' 
+  },
+  { 
+    q: 'Do I need to be a member to attend?', 
+    a: 'Not at all! Our doors are open to everyone—whether you are just visiting, searching for a church home, or seeking spiritual growth.' 
+  },
+  { 
+    q: 'How can I get involved in a ministry?', 
+    a: 'We would love to help you find your place to serve! You can speak with any of our team members after the service or reach out to us through the contact page.' 
+  }
+];
 
   return(
     <>
@@ -986,7 +1010,7 @@ function VisitPage({setPage}){
           {/* ONLINE SERVICES */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:20,marginBottom:64}}>
             {[
-              {label:'Bible Study',day:'Every Wednesday',time:'7:00 PM CST',mode:'Zoom Online',detail:`ID: ${ZOOM_ID} · Pass: ${ZOOM_PASS}`, note:'Grow deeper in Scripture and in your walk with God.'},
+              {label:'Bible Study',day:'Every Tuesday',time:'7:00 PM CST',mode:'Zoom Online',detail:`ID: ${ZOOM_ID} · Pass: ${ZOOM_PASS}`, note:'Grow deeper in Scripture and in your walk with God.'},
               {label:'Prayer Meeting',day:'Every Thursday',time:'7:00 PM CST',mode:'Zoom Online',detail:`ID: ${ZOOM_ID} · Pass: ${ZOOM_PASS}`, note:'Stand with us in prayer for revival, families, and the nations.'},
             ].map(s=>(
               <div key={s.label} style={{border:'1px solid var(--border)',padding:32,background:'var(--white)'}}>
@@ -1011,6 +1035,7 @@ function VisitPage({setPage}){
                  ))}
                </div>
             </div>
+            
             <div>
               <h3 className="serif" style={{fontSize:'clamp(26px,3vw,38px)',fontWeight:900,marginBottom:28,color:'var(--ink)'}}>Helpful answers before you arrive</h3>
               <div style={{display:'flex',flexDirection:'column',gap:0}}>
@@ -1039,11 +1064,9 @@ function VisitPage({setPage}){
 function EventsPage(){
   const events=[
     {title:'Sunday Service',cat:'Main Service',time:'9:00 AM CST',detail:ADDRESS,next:nextDay(0,14),day:'SUN',link:MAPS_URL, note:'Our main weekly worship gathering for praise, prayer, the Word, and fellowship.'},
-    {title:'Bible Study',cat:'Teaching',time:'7:00 PM CST',detail:`Zoom ID: ${ZOOM_ID} · Pass: ${ZOOM_PASS}`,next:nextDay(3,20),day:'WED', note:'Scripture-centered teaching that helps believers grow deeper in Christ.'},
+    {title:'Bible Study',cat:'Teaching',time:'7:00 PM CST',detail:`Zoom ID: ${ZOOM_ID} · Pass: ${ZOOM_PASS}`,next:nextDay(2,20),day:'TUE', note:'Scripture-centered teaching that helps believers grow deeper in Christ.'},
     {title:'Prayer Meeting',cat:'Intercession',time:'7:00 PM CST',detail:`Zoom ID: ${ZOOM_ID} · Pass: ${ZOOM_PASS}`,next:nextDay(4,20),day:'THU', note:'A dedicated time of prayer for revival, families, the Church, and the nations.'},
-    {title:'Evangelism and outreach',cat:'Upcoming',time:'TBA',detail:'Details will appear here',next:'Upcoming',day:'TBA', note:'This space is ready for future outreach events, community impact activities, and evangelism days.'},
-    {title:'Special revival gatherings',cat:'Upcoming',time:'TBA',detail:'Watch this page for updates',next:'Coming soon',day:'TBA', note:'This section is prepared for conferences, revival nights, guest ministers, and special church programs.'},
-  ];
+      ];
   return(
     <>
       <section style={{paddingTop:140,background:'var(--paper)',borderBottom:'2px solid var(--ink)'}}>
@@ -1538,7 +1561,7 @@ function Footer({setPage}){
           </div>
           <div>
             <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'rgba(255,255,255,.3)',textTransform:'uppercase',marginBottom:20}}>Service Times</div>
-            {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Wed 7:00 PM · Zoom'],['Prayer Meeting','Thu 7:00 PM · Zoom']].map(([l,v])=>(
+            {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Tue 7:00 PM · Zoom'],['Prayer Meeting','Thu 7:00 PM · Zoom']].map(([l,v])=>(
               <div key={l} style={{marginBottom:14}}>
                 <div style={{fontSize:10,color:'rgba(255,255,255,.3)',marginBottom:2}}>{l}</div>
                 <div style={{fontSize:13,color:'rgba(255,255,255,.8)',fontWeight:500}}>{v}</div>
