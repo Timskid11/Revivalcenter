@@ -458,151 +458,155 @@ function HomePage({setPage}){
     <>
       {/* HERO */}
 <section
-  className="hero-grid"
-  style={{
-    minHeight:'100vh',
-    paddingTop:80,
-    display:'grid',
-    gridTemplateColumns:'1fr',
-    background:'var(--paper)',
-    overflow:'hidden',
-    borderBottom:'2px solid var(--ink)'
-  }}
+style={{
+minHeight:'100vh',
+paddingTop:80,
+display:'flex',
+justifyContent:'center',
+alignItems:'center',
+background:'var(--paper)',
+borderBottom:'2px solid var(--ink)',
+position:'relative',
+overflow:'hidden'
+}}
 >
 
-  <div
-    style={{
-      display:'flex',
-      flexDirection:'column',
-      justifyContent:'center',
-      padding:'8% 7%',
-      maxWidth:'900px',
-      width:'100%',
-      margin:'auto'
-    }}
-  >
+{/* subtle background accent */}
+<div style={{
+position:'absolute',
+top:'-200px',
+right:'-100px',
+width:'700px',
+height:'700px',
+borderRadius:'50%',
+background:'rgba(204,91,52,.06)'
+}}/>
 
-    <div className="fade-up">
-      <Eyebrow>Welcome</Eyebrow>
-    </div>
+<div style={{
+width:'100%',
+maxWidth:'1100px',
+padding:'8% 7%',
+position:'relative',
+zIndex:2
+}}>
 
-    <h1
-      className="serif fade-up"
-      style={{
-        fontSize:'clamp(46px,7.5vw,96px)',
-        fontWeight:900,
-        lineHeight:.9,
-        color:'var(--ink)',
-        marginBottom:20,
-        animationDelay:'.1s'
-      }}
-    >
-      Revival Center<br/>
-      Texas
-    </h1>
+<div className="fade-up">
+<Eyebrow>Welcome</Eyebrow>
+</div>
 
-    <h2
-      className="fade-up serif"
-      style={{
-        fontSize:'clamp(24px,3.5vw,42px)',
-        color:'var(--rust)',
-        fontWeight:400,
-        fontStyle:'italic',
-        marginBottom:32,
-        animationDelay:'.15s'
-      }}
-    >
-      God's Purpose & His Fire.
-    </h2>
+<h1
+className="serif fade-up"
+style={{
+fontSize:'clamp(56px,8vw,110px)',
+fontWeight:900,
+lineHeight:.9,
+marginBottom:24
+}}
+>
+Revival Center
+<br/>
+Texas
+</h1>
 
-    <p
-      className="fade-up"
-      style={{
-        fontSize:'clamp(16px,2vw,20px)',
-        color:'var(--muted)',
-        lineHeight:1.75,
-        maxWidth:620,
-        marginBottom:48,
-        animationDelay:'.2s',
-        fontWeight:400
-      }}
-    >
-      A warm, elegant church home for worship, prayer,
-      revival, and growth in Christ. We welcome the Holy
-      Spirit to move in our lives with clarity and spiritual
-      depth.
-    </p>
+<h2
+className="fade-up serif"
+style={{
+fontSize:'clamp(24px,4vw,42px)',
+color:'var(--rust)',
+fontStyle:'italic',
+fontWeight:400,
+marginBottom:35
+}}
+>
+God's Purpose & His Fire.
+</h2>
 
-    <div
-      className="fade-up btn-group"
-      style={{
-        display:'flex',
-        gap:14,
-        flexWrap:'wrap',
-        marginBottom:56,
-        animationDelay:'.3s'
-      }}
-    >
-      <button
-        className="btn btn-ink"
-        onClick={()=>setPage('visit')}
-      >
-        Plan Your Visit
-      </button>
+<p
+className="fade-up"
+style={{
+maxWidth:'700px',
+fontSize:'clamp(16px,2vw,20px)',
+lineHeight:1.8,
+marginBottom:50,
+color:'var(--muted)'
+}}
+>
+A warm, elegant church home for worship,
+prayer, revival, and growth in Christ.
+We welcome the Holy Spirit to move in our
+lives with clarity and spiritual depth.
+</p>
 
-      <button
-        className="btn btn-outline"
-        onClick={()=>setPage('sermons')}
-      >
-        Watch Sermons
-      </button>
-    </div>
+<div
+className="fade-up"
+style={{
+display:'flex',
+gap:16,
+marginBottom:60,
+flexWrap:'wrap'
+}}
+>
+<button
+className="btn btn-ink"
+onClick={()=>setPage('visit')}
+>
+Plan Your Visit
+</button>
 
-    <div
-      className="fade-up stats-strip"
-      style={{
-        display:'flex',
-        gap:40,
-        paddingTop:40,
-        borderTop:'1px solid var(--border)',
-        animationDelay:'.4s',
-        flexWrap:'wrap'
-      }}
-    >
-      {[
-        ['Sunday Service','9:00 AM CST · In Person'],
-        ['Bible Study','Tue 7:00 PM · Online'],
-        ['Prayer','Thu 7:00 PM · Online']
-      ].map(([l,v])=>(
-        <div key={l}>
-          <div
-            style={{
-              fontSize:9,
-              fontWeight:800,
-              letterSpacing:'.22em',
-              color:'var(--rust)',
-              textTransform:'uppercase',
-              marginBottom:5
-            }}
-          >
-            {l}
-          </div>
+<button
+className="btn btn-outline"
+onClick={()=>setPage('sermons')}
+>
+Watch Sermons
+</button>
+</div>
 
-          <div
-            style={{
-              fontSize:15,
-              fontWeight:600,
-              color:'var(--ink)'
-            }}
-          >
-            {v}
-          </div>
-        </div>
-      ))}
-    </div>
 
-  </div>
+<div
+style={{
+display:'grid',
+gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',
+gap:20
+}}
+>
 
+{[
+['Sunday Service','9:00 AM CST · In Person'],
+['Bible Study','Tue 7:00 PM · Online'],
+['Prayer','Thu 7:00 PM · Online']
+].map(([l,v])=>(
+
+<div
+key={l}
+style={{
+padding:'24px',
+border:'1px solid var(--border)',
+background:'rgba(255,255,255,.5)'
+}}
+>
+<div style={{
+fontSize:10,
+letterSpacing:'.2em',
+fontWeight:800,
+textTransform:'uppercase',
+color:'var(--rust)',
+marginBottom:10
+}}>
+{l}
+</div>
+
+<div style={{
+fontWeight:600
+}}>
+{v}
+</div>
+
+</div>
+
+))}
+</div>
+
+</div>
 </section>
 
       {/* ABOUT STRIP */}
