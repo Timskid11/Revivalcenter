@@ -381,7 +381,7 @@ function HomePage({setPage}){
                 marginBottom:35
               }}
             >
-              God's Purpose <span style={{fontFamily: "'Plus Jakarta Sans', sans-serif", fontStyle: 'normal', fontWeight: 600}}>&</span> His Fire.
+              God's Purpose <span style={{fontFamily: "'Plus Jakarta Sans', sans-serif", fontStyle: 'normal', fontWeight: 600}}></span>and His Fire.
             </h2>
 
             <p
@@ -393,7 +393,7 @@ function HomePage({setPage}){
                 color:'var(--muted)'
               }}
             >
-              A warm, elegant church home for worship,
+              A church home for worship,
               prayer, revival, and growth in Christ.
               We welcome the Holy Spirit to move in our
               lives with clarity and spiritual depth.
@@ -438,7 +438,7 @@ function HomePage({setPage}){
                   <div style={{fontWeight: 700, color: 'var(--ink)'}}>Sunday Service</div>
                 </div>
                 <div style={{fontSize: 13, color: 'var(--muted)', paddingLeft: 34}}>
-                  9:00 AM CST · <span style={{fontWeight:900}}>{ADDRESS}</span>
+                  9:00 AM CST · <span style={{fontWeight:900}}><br/>{ADDRESS}</span>
                 </div>
               </div>
 
@@ -446,10 +446,21 @@ function HomePage({setPage}){
               <div style={{border: '1px solid var(--border)', borderRadius: 12, padding: 20, background: 'var(--paper)'}}>
                 <div style={{display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8}}>
                   <div style={{fontSize: 18, color: 'var(--rust)'}}></div>
-                  <div style={{fontWeight: 700, color: 'var(--ink)'}}>Midweek online gatherings</div>
+                  <div style={{fontWeight: 700, color: 'var(--ink)'}}>Tuesday | Bible Study</div>
                 </div>
                 <div style={{fontSize: 13, color: 'var(--muted)', paddingLeft: 34}}>
-                  <div style={{marginBottom: 4}}>Wednesdays and Thursdays · 7:00 PM CST</div>
+                  <div style={{marginBottom: 4}}>7:00 PM CST</div>
+                  <div>Zoom ID: {ZOOM_ID} · Password: <strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></div>
+                </div>
+              </div>
+
+              <div style={{border: '1px solid var(--border)', borderRadius: 12, padding: 20, background: 'var(--paper)'}}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8}}>
+                  <div style={{fontSize: 18, color: 'var(--rust)'}}></div>
+                  <div style={{fontWeight: 700, color: 'var(--ink)'}}>Thursday | Prayer Meeting</div>
+                </div>
+                <div style={{fontSize: 13, color: 'var(--muted)', paddingLeft: 34}}>
+                  <div style={{marginBottom: 4}}>7:00 PM CST</div>
                   <div>Zoom ID: {ZOOM_ID} · Password: <strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></div>
                 </div>
               </div>
@@ -1037,11 +1048,11 @@ function VisitPage({setPage}){
 ════════════════════════════════════════════════════ */
 function EventsPage(){
   const events=[
-    {title:'Sunday Service',cat:'Main Service',time:'9:00 AM CST',detail:<span style={{fontWeight:900}}>{ADDRESS}</span>,next:nextDay(0,14),day:'SUN',link:MAPS_URL, note:'Our main weekly worship gathering for praise, prayer, the Word, and fellowship.'},
-    {title:'Bible Study',cat:'Teaching',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(3,20),day:'WED', note:'Scripture-centered teaching that helps believers grow deeper in Christ.'},
-    {title:'Prayer Meeting',cat:'Intercession',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(4,20),day:'THU', note:'A dedicated time of prayer for revival, families, the Church, and the nations.'},
-    {title:'Evangelism & Outreach',cat:'Outreach',time:'To Be Announced',detail:'To Be Announced',next:'To Be Announced',day:'TBA', note:''},
-    {title:'Special Revival Gatherings',cat:'Revival',time:'To Be Announced',detail:'To Be Announced',next:'To Be Announced',day:'TBA', note:''},
+    {title:'Sunday Service',cat:'In Person',time:'9:00 AM CST',detail:<span style={{fontWeight:900}}>{ADDRESS}</span>,next:nextDay(0,14),day:'SUN',link:MAPS_URL, note:'Our main weekly worship gathering for praise, prayer, the Word, and fellowship.'},
+    {title:'Bible Study',cat:'Online',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(3,20),day:'WED', note:'Scripture-centered teaching that helps believers grow deeper in Christ.'},
+    {title:'Prayer Meeting',cat:'Online',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(4,20),day:'THU', note:'A dedicated time of prayer for revival, families, the Church, and the nations.'},
+    {title:'Evangelism and Outreach',cat:'Upcoming',time:'To Be Announced',detail:'To Be Announced',next:'To Be Announced',day:'TBA', note:''},
+    {title:'Special Revival Gatherings',cat:'Upcoming',time:'To Be Announced',detail:'To Be Announced',next:'To Be Announced',day:'TBA', note:''},
       ];
   return(
     <>
@@ -1454,7 +1465,7 @@ function ContactPage({purpose='prayer'}){
             {/* ... (Keep your existing Find Us section here) ... */}
             <div>
               <Eyebrow>Find us</Eyebrow>
-              {[{icon:'📍',l:'Address',v:<span style={{fontWeight:900}}>{ADDRESS}</span>,href:MAPS_URL},{icon:'📞',l:'Phone',v:PHONE,href:`tel:${PHONE}`},{icon:'✉',l:'Email',v:EMAIL,href:`mailto:${EMAIL}`},{icon:'💻',l:'Online Gatherings',v:<>{`Wed & Thu · 7:00 PM CST · Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>}].map(c=>(
+              {[{icon:'📍',l:'Address',v:<span style={{fontWeight:900}}>{ADDRESS}</span>,href:MAPS_URL},{icon:'📞',l:'Phone',v:PHONE,href:`tel:${PHONE}`},{icon:'✉',l:'Email',v:EMAIL,href:`mailto:${EMAIL}`},{icon:'💻',l:'Online Gatherings',v:<>{`Wed and Thu · 7:00 PM CST · Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>}].map(c=>(
                 <div key={c.l} style={{borderBottom:'1px solid var(--border)',padding:'22px 0',display:'flex',gap:16,alignItems:'flex-start'}}>
                   <span style={{fontSize:20,marginTop:2,flexShrink:0}}>{c.icon}</span>
                   <div>
@@ -1500,7 +1511,7 @@ function TestimoniesPage({setPage}){
   const cards=[
     {icon:'✦',title:'Salvation Stories',body:'This testimony space is ready for future stories of lives changed by Jesus Christ. If you have a salvation testimony, we would love to hear from you.'},
     {icon:'◉',title:'Answered Prayers',body:'This testimony space is ready for future stories of God\'s faithfulness and answers to prayer. Prayer changes things at Revival Center Texas.'},
-    {icon:'◎',title:'Healing & Restoration',body:'This testimony space is ready for future stories of healing, restoration, and renewed hope. God still moves in power today.'},
+    {icon:'◎',title:'Healing and Restoration',body:'This testimony space is ready for future stories of healing, restoration, and renewed hope. God still moves in power today.'},
   ];
   return(
     <>
