@@ -548,8 +548,11 @@ function HomePage({setPage}){
       {/* LATEST SERMONS STRIP */}
       <LatestSermonsStrip setPage={setPage}/>
 
+      {/* LATEST SERMONS STRIP */}
+      <LatestSermonsStrip setPage={setPage}/>
+
       {/* QUICK NAV BAR */}
-      <div style={{background:'var(--cream)',padding:'28px 40px',borderTop:'3px solid var(--rust)',borderBottom:'1px solid var(--border)'}}>
+      <div style={{background:'var(--cream)',padding:'28px 40px'}}>
         <div className="wrap" style={{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center',alignItems:'center'}}>
           <span style={{color:'var(--muted)',fontSize:11,fontWeight:800,letterSpacing:'.15em',textTransform:'uppercase',marginRight:8}}>Explore:</span>
           {[['Beliefs','beliefs'],['Give','give'],['Socials','socials'],['Contact','contact']].map(([l,p])=>(
@@ -1278,41 +1281,49 @@ function GivePage(){
           </h1>
         </div>
       </section>
+      
       <section className="section">
         <div className="wrap">
           <div className="two-col" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:72,marginBottom:80}}>
+            
+            {/* LEFT COLUMN: Info & Pillars */}
             <div>
-              <p style={{fontSize:'clamp(17px,2vw,21px)',lineHeight:1.8,color:'var(--ink)',marginBottom:24,fontWeight:400}}>
+              <p style={{fontSize:'clamp(17px,2vw,21px)',lineHeight:1.8,color:'var(--ink)',marginBottom:32,fontWeight:400}}>
                 Your giving supports worship, discipleship, outreach, care, and the ongoing work of God through Revival Center Texas. Give with joy, clarity, and simplicity.
               </p>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
                 {['Worship and church life','Discipleship and teaching','Prayer and outreach','Care and ministry support'].map(item=>(
-                  <div key={item} style={{background:'var(--cream)',border:'1px solid var(--border)',padding:'14px 16px',display:'flex',gap:10,alignItems:'center',fontSize:13,fontWeight:600,color:'var(--ink)'}}>
-                    <div style={{width:6,height:6,borderRadius:'50%',background:'var(--rust)',flexShrink:0}}/>
+                  <div key={item} style={{background:'var(--white)',border:'1px solid var(--border)',borderRadius: 12, padding:'20px 24px',display:'flex',gap:12,alignItems:'center',fontSize:15,fontWeight:600,color:'var(--ink)', boxShadow: '0 4px 12px rgba(0,0,0,0.03)'}}>
+                    <div style={{width:8,height:8,borderRadius:'50%',background:'var(--rust)',flexShrink:0}}/>
                     {item}
                   </div>
                 ))}
               </div>
             </div>
             
-            {/* Swapped out dark background for a light theme --cream */}
-            <div style={{background:'var(--cream)',padding:40, border:'1px solid var(--border)'}}>
+            {/* RIGHT COLUMN: distinct Bank Detail Cards */}
+            <div style={{background:'var(--cream)',padding:48, border:'1px solid var(--border)', borderRadius: 16}}>
               <Eyebrow>Giving details</Eyebrow>
-              <h3 className="serif" style={{fontSize:28,color:'var(--ink)',marginBottom:28,lineHeight:1.1}}>Give by bank transfer</h3>
-              <div style={{display:'flex',flexDirection:'column',gap:12}}>
+              <h3 className="serif" style={{fontSize:32,color:'var(--ink)',marginBottom:32,lineHeight:1.1}}>Give by bank transfer</h3>
+              
+              <div style={{display:'flex',flexDirection:'column',gap:16}}>
                 {BANK_DETAILS.map(g=>(
-                  <div key={g.label} style={{borderBottom:'1px solid var(--border)',paddingBottom:12}}>
-                    <div style={{fontSize:9,fontWeight:800,letterSpacing:'.2em',color:'var(--muted)',textTransform:'uppercase',marginBottom:6}}>{g.label}</div>
+                  <div key={g.label} style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
+                    {/* Increased label size to 18px */}
+                    <div style={{fontSize:18,fontWeight:800,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase'}}>{g.label}</div>
+                    
                     <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
-                      <span style={{fontSize:14,color:'var(--ink)',fontFamily:'monospace',fontWeight:600}}>{g.value}</span>
+                      {/* Set value size to 16px */}
+                      <span style={{fontSize:16,color:'var(--muted)',fontFamily:'monospace',fontWeight:600}}>{g.value}</span>
                       <CopyBtn value={g.value}/>
                     </div>
                   </div>
                 ))}
-                <div style={{paddingTop:8,fontSize:12,color:'var(--muted)',lineHeight:1.6}}>
+                <div style={{paddingTop:16,fontSize:14,color:'var(--muted)',lineHeight:1.6, textAlign: 'center'}}>
                   Bank of America, N.A. · 222 Broadway, New York, NY 10038
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -1560,58 +1571,58 @@ function TestimoniesPage({setPage}){
 ════════════════════════════════════════════════════ */
 function Footer({setPage}){
   return(
-    <footer style={{background:'var(--blue)',color:'rgba(255,255,255,0.75)',borderTop:'4px solid var(--rust)',padding:'72px 40px 40px'}}>
+    <footer style={{background:'var(--paper)',color:'var(--muted)',padding:'72px 40px 40px'}}>
       <div className="wrap">
         <div style={{display:'grid',gridTemplateColumns:'1.5fr 1fr 1fr 1fr',gap:48,marginBottom:64}} className="container">
           <div>
-            <div style={{marginBottom:20}}><Logo light={true}/></div>
-            <p style={{fontSize:13,lineHeight:1.9,maxWidth:320,color:'rgba(255,255,255,0.75)'}}>A Christ-centered church family devoted to worship, prayer, sound doctrine, revival, discipleship, and the transforming power of the Holy Spirit.</p>
+            <div style={{marginBottom:20}}><Logo /></div>
+            <p style={{fontSize:13,lineHeight:1.9,maxWidth:320,color:'var(--muted)'}}>A Christ-centered church family devoted to worship, prayer, sound doctrine, revival, discipleship, and the transforming power of the Holy Spirit.</p>
             <div style={{display:'flex',flexWrap:'wrap',gap:12,marginTop:24}}>
               {SOCIAL_LINKS.map(s=>(
                 <a key={s.name} href={s.url} target="_blank" rel="noreferrer" aria-label={`Follow RCCG Revival Center Texas on ${s.name}`}
-                  style={{display:'flex',alignItems:'center',justifyContent:'center',width:44,height:44,borderRadius:'50%',background:'rgba(255,255,255,0.1)',color:'#fff',transition:'all .3s',border:'1px solid rgba(255,255,255,0.15)'}}
-                  onMouseEnter={e=>{e.currentTarget.style.background=s.color;e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.borderColor=s.color;}}
-                  onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,0.1)';e.currentTarget.style.transform='none';e.currentTarget.style.borderColor='rgba(255,255,255,0.15)';}}>
+                  style={{display:'flex',alignItems:'center',justifyContent:'center',width:44,height:44,borderRadius:'50%',background:'var(--white)',color:'var(--ink)',transition:'all .3s',border:'1px solid var(--border)'}}
+                  onMouseEnter={e=>{e.currentTarget.style.background=s.color;e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.borderColor=s.color;e.currentTarget.style.color='#fff';}}
+                  onMouseLeave={e=>{e.currentTarget.style.background='var(--white)';e.currentTarget.style.transform='none';e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.color='var(--ink)';}}>
                   <div style={{transform: 'scale(0.85)'}}>{s.icon}</div>
                 </a>
               ))}
             </div>
           </div>
           <div>
-            <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'#fff',textTransform:'uppercase',marginBottom:20}}>Navigate</div>
+            <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'var(--ink)',textTransform:'uppercase',marginBottom:20}}>Navigate</div>
             <div style={{display:'flex',flexDirection:'column',gap:12}}>
               {['home','about','ministries','pastors','beliefs','visit','events','sermons','testimonies','give','socials','contact'].map(id=>(
                 <button key={id} onClick={()=>{setPage(id);window.scrollTo(0,0);}}
-                  style={{background:'none',border:'none',textAlign:'left',color:'rgba(255,255,255,0.75)',fontSize:13,fontWeight:500,cursor:'pointer',fontFamily:'inherit',textTransform:'capitalize',transition:'color .2s'}}
-                  onMouseEnter={e=>e.currentTarget.style.color='#fff'}
-                  onMouseLeave={e=>e.currentTarget.style.color='rgba(255,255,255,0.75)'}>
+                  style={{background:'none',border:'none',textAlign:'left',color:'var(--muted)',fontSize:13,fontWeight:600,cursor:'pointer',fontFamily:'inherit',textTransform:'capitalize',transition:'color .2s'}}
+                  onMouseEnter={e=>e.currentTarget.style.color='var(--rust)'}
+                  onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>
                   {id==='visit'?"I'm New":id.charAt(0).toUpperCase()+id.slice(1)}
                 </button>
               ))}
             </div>
           </div>
           <div>
-            <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'#fff',textTransform:'uppercase',marginBottom:20}}>Service Times</div>
+            <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'var(--ink)',textTransform:'uppercase',marginBottom:20}}>Service Times</div>
             {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Wed 7:00 PM · Zoom'],['Prayer Meeting','Thu 7:00 PM · Zoom']].map(([l,v])=>(
               <div key={l} style={{marginBottom:16}}>
-                <div style={{fontSize:11,color:'rgba(255,255,255,0.6)',marginBottom:4}}>{l}</div>
-                <div style={{fontSize:13,color:'#fff',fontWeight:600}}>{v}</div>
+                <div style={{fontSize:11,color:'var(--muted)',marginBottom:4}}>{l}</div>
+                <div style={{fontSize:13,color:'var(--ink)',fontWeight:700}}>{v}</div>
               </div>
             ))}
           </div>
           <div>
-            <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'#fff',textTransform:'uppercase',marginBottom:20}}>Contact</div>
+            <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'var(--ink)',textTransform:'uppercase',marginBottom:20}}>Contact</div>
             <div style={{display:'flex',flexDirection:'column',gap:12}}>
-              <a href={`mailto:${EMAIL}`} style={{fontSize:13,color:'rgba(255,255,255,0.75)',transition:'color .2s'}} onMouseEnter={e=>e.currentTarget.style.color='#fff'} onMouseLeave={e=>e.currentTarget.style.color='rgba(255,255,255,0.75)'}>{EMAIL}</a>
-              <a href={`tel:${PHONE}`} style={{fontSize:13,color:'rgba(255,255,255,0.75)',transition:'color .2s'}} onMouseEnter={e=>e.currentTarget.style.color='#fff'} onMouseLeave={e=>e.currentTarget.style.color='rgba(255,255,255,0.75)'}>{PHONE}</a>
-              <p style={{fontSize:12,color:'rgba(255,255,255,0.6)',lineHeight:1.6}}><span style={{fontWeight:900}}>{ADDRESS}</span></p>
+              <a href={`mailto:${EMAIL}`} style={{fontSize:13,color:'var(--muted)',fontWeight:600,transition:'color .2s'}} onMouseEnter={e=>e.currentTarget.style.color='var(--rust)'} onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>{EMAIL}</a>
+              <a href={`tel:${PHONE}`} style={{fontSize:13,color:'var(--muted)',fontWeight:600,transition:'color .2s'}} onMouseEnter={e=>e.currentTarget.style.color='var(--rust)'} onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>{PHONE}</a>
+              <p style={{fontSize:12,color:'var(--muted)',lineHeight:1.6}}><span style={{fontWeight:900,color:'var(--ink)'}}>{ADDRESS}</span></p>
               <a href={MAPS_URL} target="_blank" rel="noreferrer" className="btn btn-rust btn-sm" style={{display:'inline-flex',marginTop:8, border: 'none'}}>Get Directions</a>
             </div>
           </div>
         </div>
-        <div style={{borderTop:'1px solid rgba(255,255,255,0.15)',paddingTop:28,display:'flex',flexWrap:'wrap',gap:12,justifyContent:'space-between',alignItems:'center'}}>
-          <p style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>© {new Date().getFullYear()} RCCG Revival Center Texas. All rights reserved.</p>
-          <p style={{fontSize:12,color:'rgba(255,255,255,0.5)'}}>God bless you. We look forward to worshiping with you.</p>
+        <div style={{borderTop:'1px solid var(--border)',paddingTop:28,display:'flex',flexWrap:'wrap',gap:12,justifyContent:'space-between',alignItems:'center'}}>
+          <p style={{fontSize:12,color:'var(--muted)'}}>© {new Date().getFullYear()} RCCG Revival Center Texas. All rights reserved.</p>
+          <p style={{fontSize:12,color:'var(--muted)'}}>God bless you. We look forward to worshiping with you.</p>
         </div>
       </div>
     </footer>
