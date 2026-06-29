@@ -526,7 +526,7 @@ function HomePage({setPage}){
               <h3 className="serif" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:900,marginBottom:8,color:'var(--ink)'}}>Next Sunday</h3>
               <div style={{fontSize:14,color:'var(--muted)',marginBottom:32}}>{nextDay(0,14)}</div>
               <div style={{display:'flex',flexDirection:'column',gap:0,border:'1px solid var(--border)'}}>
-                {[['Sunday Worship','9:00 AM CST · In Person'],['Bible Study','Wednesday · 7:00 PM · Zoom'],['Prayer Meeting','Thursday · 7:00 PM · Zoom']].map(([t,d])=>(
+                {[['Sunday Worship','9:00 AM CST · In Person'],['Bible Study','Tuesday · 7:00 PM · Zoom'],['Prayer Meeting','Thursday · 7:00 PM · Zoom']].map(([t,d])=>(
                   <div key={t} style={{display:'flex',gap:16,alignItems:'center',padding:'18px 20px',borderBottom:'1px solid var(--border)',background:'var(--white)'}}>
                     <div style={{width:3,height:36,background:'var(--rust)',flexShrink:0,borderRadius:2}}/>
                     <div>
@@ -951,7 +951,7 @@ function VisitPage({setPage}){
   },
   { 
     q: 'Are your midweek services online?', 
-    a: 'Yes. We host our Bible Study every Wednesday and our Prayer Meeting every Thursday, both via Zoom at 7:00 PM CST.' 
+    a: 'Yes. We host our Bible Study every Tuesday and our Prayer Meeting every Thursday, both via Zoom at 7:00 PM CST.' 
   },
   { 
     q: 'Do I need to be a member to attend?', 
@@ -998,7 +998,8 @@ function VisitPage({setPage}){
           {/* ONLINE SERVICES */}
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:20,marginBottom:64}}>
             {[
-              {label:'Bible Study',day:'Every Wednesday',time:'7:00 PM CST',mode:'Zoom Online',detail:<>{`ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>, note:'Grow deeper in Scripture and in your walk with God.'},
+              // UPDATE THIS LINE:
+              {label:'Bible Study',day:'Every Tuesday',time:'7:00 PM CST',mode:'Zoom Online',detail:<>{`ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>, note:'Grow deeper in Scripture and in your walk with God.'},
               {label:'Prayer Meeting',day:'Every Thursday',time:'7:00 PM CST',mode:'Zoom Online',detail:<>{`ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>, note:'Stand with us in prayer for revival, families, and the nations.'},
             ].map(s=>(
               <div key={s.label} style={{border:'1px solid var(--border)',padding:32,background:'var(--white)'}}>
@@ -1050,13 +1051,17 @@ function VisitPage({setPage}){
    EVENTS PAGE
 ════════════════════════════════════════════════════ */
 function EventsPage(){
+  /* Inside function EventsPage() */
   const events=[
     {title:'Sunday Service',cat:'In Person',time:'9:00 AM CST',detail:<span style={{fontWeight:900}}>{ADDRESS}</span>,next:nextDay(0,14),day:'SUN',link:MAPS_URL, note:'Our main weekly worship gathering for praise, prayer, the Word, and fellowship.'},
-    {title:'Bible Study',cat:'Online',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(3,20),day:'WED', note:'Scripture-centered teaching that helps believers grow deeper in Christ.'},
+    
+    // UPDATE THIS LINE:
+    {title:'Bible Study',cat:'Online',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(2,20),day:'TUE', note:'Scripture-centered teaching that helps believers grow deeper in Christ.'},
+    
     {title:'Prayer Meeting',cat:'Online',time:'7:00 PM CST',detail:<>{`Zoom ID: ${ZOOM_ID} · Password: `}<strong style={{fontWeight:900}}>{ZOOM_PASS}</strong></>,next:nextDay(4,20),day:'THU', note:'A dedicated time of prayer for revival, families, the Church, and the nations.'},
     {title:'Evangelism and Outreach',cat:'Upcoming',time:'To Be Announced',detail:'To Be Announced',next:'To Be Announced',day:'TBA', note:''},
     {title:'Special Revival Gatherings',cat:'Upcoming',time:'To Be Announced',detail:'To Be Announced',next:'To Be Announced',day:'TBA', note:''},
-      ];
+  ];
   return(
     <>
       <section style={{paddingTop:140,background:'var(--paper)',borderBottom:'2px solid var(--ink)'}}>
@@ -1601,9 +1606,10 @@ function Footer({setPage}){
               ))}
             </div>
           </div>
-          <div>
+        <div>
             <div style={{fontSize:9,fontWeight:800,letterSpacing:'.22em',color:'var(--ink)',textTransform:'uppercase',marginBottom:20}}>Service Times</div>
-            {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Wed 7:00 PM · Zoom'],['Prayer Meeting','Thu 7:00 PM · Zoom']].map(([l,v])=>(
+            {/* UPDATE THIS ARRAY: */}
+            {[['Sunday Service','9:00 AM CST · In Person'],['Bible Study','Tue 7:00 PM · Zoom'],['Prayer Meeting','Thu 7:00 PM · Zoom']].map(([l,v])=>(
               <div key={l} style={{marginBottom:16}}>
                 <div style={{fontSize:11,color:'var(--muted)',marginBottom:4}}>{l}</div>
                 <div style={{fontSize:13,color:'var(--ink)',fontWeight:700}}>{v}</div>
