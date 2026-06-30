@@ -1296,11 +1296,12 @@ function GivePage(){
               <p style={{fontSize:'clamp(18px,2vw,22px)',lineHeight:1.8,color:'var(--ink)',marginBottom:32,fontWeight:500}}>
                 Your giving supports worship, discipleship, outreach, care, and the ongoing work of God through Revival Center Texas. Give with joy, clarity, and simplicity.
               </p>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+              {/* Added className="give-methods" here to fix the Android squishing issue */}
+              <div className="give-methods" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
                 {['Worship and church life','Discipleship and teaching','Prayer and outreach','Care and ministry support'].map(item=>(
                   <div key={item} style={{background:'var(--white)',border:'1px solid var(--border)',borderRadius: 12, padding:'20px 24px',display:'flex',gap:12,alignItems:'center',fontSize:16,fontWeight:700,color:'var(--ink)', boxShadow: '0 4px 12px rgba(0,0,0,0.03)'}}>
                     <div style={{width:8,height:8,borderRadius:'50%',background:'var(--rust)',flexShrink:0}}/>
-                    {item}
+                    <span style={{wordBreak: 'break-word'}}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -1312,20 +1313,9 @@ function GivePage(){
               <h3 className="serif" style={{fontSize:36,color:'var(--ink)',marginBottom:32,lineHeight:1.1}}>Give by bank transfer</h3>
               
               <div style={{display:'flex',flexDirection:'column',gap:16}}>
-                {/* Domestic Bank Cards */}
-                {BANK_DETAILS.map(g=>(
-                  <div key={g.label} style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
-                    <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase'}}>{g.label}</div>
-                    
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
-                      <span style={{fontSize:18,color:'var(--muted)',fontFamily:'monospace',fontWeight:700}}>{g.value}</span>
-                      <CopyBtn value={g.value}/>
-                    </div>
-                  </div>
-                ))}
-
-                {/* NEW INTERNATIONAL WIRE TRANSFER BANNER */}
-                <div style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.04)', marginTop: 12}}>
+                
+                {/* INTERNATIONAL WIRE TRANSFER BANNER - MOVED TO TOP */}
+                <div style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
                   <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase', borderBottom: '2px solid var(--cream)', paddingBottom: 12}}>
                     International Wire Transfer Details
                   </div>
@@ -1333,36 +1323,48 @@ function GivePage(){
                   <div style={{display:'flex', flexDirection:'column', gap:16}}>
                     <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8}}>
                       <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Account Name:</span>
-                      <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>RCCG REVIVAL CENTER TEXAS</span>
+                      <span style={{fontSize:16, color:'var(--muted)', fontFamily:'monospace', fontWeight:700, wordBreak: 'break-word'}}>RCCG REVIVAL CENTER TEXAS</span>
                     </div>
                     
                     <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8, alignItems:'center'}}>
                       <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Account Number:</span>
-                      <div style={{display:'flex', alignItems:'center', gap:10}}>
-                        <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>488134628967</span>
+                      <div style={{display:'flex', alignItems:'center', gap:10, flexWrap:'wrap'}}>
+                        <span style={{fontSize:16, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>488134628967</span>
                         <CopyBtn value="488134628967"/>
                       </div>
                     </div>
                     
                     <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8}}>
                       <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Bank Name:</span>
-                      <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>Bank of America, N.A.</span>
+                      <span style={{fontSize:16, color:'var(--muted)', fontFamily:'monospace', fontWeight:700, wordBreak: 'break-word'}}>Bank of America, N.A.</span>
                     </div>
                     
                     <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8, alignItems:'center'}}>
                       <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>SWIFT / BIC Code:</span>
-                      <div style={{display:'flex', alignItems:'center', gap:10}}>
-                        <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>BOFAUS3N</span>
+                      <div style={{display:'flex', alignItems:'center', gap:10, flexWrap:'wrap'}}>
+                        <span style={{fontSize:16, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>BOFAUS3N</span>
                         <CopyBtn value="BOFAUS3N"/>
                       </div>
                     </div>
                     
                     <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8}}>
                       <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Bank Address:</span>
-                      <span style={{fontSize:16, color:'var(--muted)', fontWeight:600, textAlign:'right'}}>222 Broadway, New York, NY 10038</span>
+                      <span style={{fontSize:15, color:'var(--muted)', fontWeight:600, textAlign:'right', wordBreak: 'break-word'}}>222 Broadway, New York, NY 10038</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Domestic Bank Cards */}
+                {BANK_DETAILS.map(g=>(
+                  <div key={g.label} style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
+                    <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase', wordBreak: 'break-word'}}>{g.label}</div>
+                    
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
+                      <span style={{fontSize:16,color:'var(--muted)',fontFamily:'monospace',fontWeight:700, wordBreak: 'break-all'}}>{g.value}</span>
+                      <CopyBtn value={g.value}/>
+                    </div>
+                  </div>
+                ))}
 
               </div>
             </div>
