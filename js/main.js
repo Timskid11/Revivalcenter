@@ -1,4 +1,4 @@
-﻿const {useState,useEffect,useCallback,memo,useRef}=React;
+﻿﻿const {useState,useEffect,useCallback,memo,useRef}=React;
 
 /* ════════════════════════════════════════════════════
    CONSTANTS — ALL REAL CHURCH DATA
@@ -1314,7 +1314,20 @@ function GivePage(){
               
               <div style={{display:'flex',flexDirection:'column',gap:16}}>
                 
-                {/* INTERNATIONAL WIRE TRANSFER BANNER - MOVED TO TOP */}
+               
+                {/* Domestic Bank Cards */}
+                {BANK_DETAILS.map(g=>(
+                  <div key={g.label} style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
+                    <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase', wordBreak: 'break-word'}}>{g.label}</div>
+                    
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
+                      <span style={{fontSize:16,color:'var(--muted)',fontFamily:'monospace',fontWeight:700, wordBreak: 'break-all'}}>{g.value}</span>
+                      <CopyBtn value={g.value}/>
+                    </div>
+                  </div>
+                ))}
+
+                 {/* INTERNATIONAL WIRE TRANSFER BANNER - MOVED TO TOP */}
                 <div style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
                   <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase', borderBottom: '2px solid var(--cream)', paddingBottom: 12}}>
                     International Wire Transfer Details
@@ -1354,17 +1367,6 @@ function GivePage(){
                   </div>
                 </div>
 
-                {/* Domestic Bank Cards */}
-                {BANK_DETAILS.map(g=>(
-                  <div key={g.label} style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
-                    <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase', wordBreak: 'break-word'}}>{g.label}</div>
-                    
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
-                      <span style={{fontSize:16,color:'var(--muted)',fontFamily:'monospace',fontWeight:700, wordBreak: 'break-all'}}>{g.value}</span>
-                      <CopyBtn value={g.value}/>
-                    </div>
-                  </div>
-                ))}
 
               </div>
             </div>
