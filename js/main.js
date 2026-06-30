@@ -1269,11 +1269,11 @@ function VideoPanel({title,tag,vids,active,setActive}){
 ════════════════════════════════════════════════════ */
 function GivePage(){
   const BANK_DETAILS = [
-    {label:"Zelle",               value:EMAIL},
-    {label:"Bank of America",     value:"488134628967"},
-    {label:"Routing (paper)",     value:"111000025"},
-    {label:"Routing (electronic)",value:"026009593"},
-    {label:"SWIFT",               value:"BOFAUS3N"},
+    {label:"Zelle",                       value:EMAIL},
+    {label:"Bank of America",             value:"RCCG REVIVAL CENTER TEXAS"},
+    {label:"Account Number",              value:"488134628967"},
+    {label:"Routing Number (Paper)",      value:"111000025"},
+    {label:"Routing Number (Electronic)", value:"026009593"}
   ];
 
   return(
@@ -1293,12 +1293,12 @@ function GivePage(){
             
             {/* LEFT COLUMN: Info & Pillars */}
             <div>
-              <p style={{fontSize:'clamp(17px,2vw,21px)',lineHeight:1.8,color:'var(--ink)',marginBottom:32,fontWeight:400}}>
+              <p style={{fontSize:'clamp(18px,2vw,22px)',lineHeight:1.8,color:'var(--ink)',marginBottom:32,fontWeight:500}}>
                 Your giving supports worship, discipleship, outreach, care, and the ongoing work of God through Revival Center Texas. Give with joy, clarity, and simplicity.
               </p>
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
                 {['Worship and church life','Discipleship and teaching','Prayer and outreach','Care and ministry support'].map(item=>(
-                  <div key={item} style={{background:'var(--white)',border:'1px solid var(--border)',borderRadius: 12, padding:'20px 24px',display:'flex',gap:12,alignItems:'center',fontSize:15,fontWeight:600,color:'var(--ink)', boxShadow: '0 4px 12px rgba(0,0,0,0.03)'}}>
+                  <div key={item} style={{background:'var(--white)',border:'1px solid var(--border)',borderRadius: 12, padding:'20px 24px',display:'flex',gap:12,alignItems:'center',fontSize:16,fontWeight:700,color:'var(--ink)', boxShadow: '0 4px 12px rgba(0,0,0,0.03)'}}>
                     <div style={{width:8,height:8,borderRadius:'50%',background:'var(--rust)',flexShrink:0}}/>
                     {item}
                   </div>
@@ -1309,26 +1309,63 @@ function GivePage(){
             {/* RIGHT COLUMN: distinct Bank Detail Cards */}
             <div style={{background:'var(--cream)',padding:48, border:'1px solid var(--border)', borderRadius: 16}}>
               <Eyebrow>Giving details</Eyebrow>
-              <h3 className="serif" style={{fontSize:32,color:'var(--ink)',marginBottom:32,lineHeight:1.1}}>Give by bank transfer</h3>
+              <h3 className="serif" style={{fontSize:36,color:'var(--ink)',marginBottom:32,lineHeight:1.1}}>Give by bank transfer</h3>
               
               <div style={{display:'flex',flexDirection:'column',gap:16}}>
+                
+                {/* INTERNATIONAL WIRE TRANSFER BANNER - MOVED TO TOP */}
+                <div style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 20, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
+                  <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase', borderBottom: '2px solid var(--cream)', paddingBottom: 12}}>
+                    International Wire Transfer Details
+                  </div>
+                  
+                  <div style={{display:'flex', flexDirection:'column', gap:16}}>
+                    <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8}}>
+                      <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Account Name:</span>
+                      <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>RCCG REVIVAL CENTER TEXAS</span>
+                    </div>
+                    
+                    <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8, alignItems:'center'}}>
+                      <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Account Number:</span>
+                      <div style={{display:'flex', alignItems:'center', gap:10}}>
+                        <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>488134628967</span>
+                        <CopyBtn value="488134628967"/>
+                      </div>
+                    </div>
+                    
+                    <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8}}>
+                      <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Bank Name:</span>
+                      <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>Bank of America, N.A.</span>
+                    </div>
+                    
+                    <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8, alignItems:'center'}}>
+                      <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>SWIFT / BIC Code:</span>
+                      <div style={{display:'flex', alignItems:'center', gap:10}}>
+                        <span style={{fontSize:17, color:'var(--muted)', fontFamily:'monospace', fontWeight:700}}>BOFAUS3N</span>
+                        <CopyBtn value="BOFAUS3N"/>
+                      </div>
+                    </div>
+                    
+                    <div style={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8}}>
+                      <span style={{fontSize:16, color:'var(--ink)', fontWeight:800}}>Bank Address:</span>
+                      <span style={{fontSize:16, color:'var(--muted)', fontWeight:600, textAlign:'right'}}>222 Broadway, New York, NY 10038</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Domestic Bank Cards */}
                 {BANK_DETAILS.map(g=>(
                   <div key={g.label} style={{background:'var(--white)', border:'1px solid var(--border)', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 4px 16px rgba(0,0,0,0.04)'}}>
-                    {/* Increased label size to 18px */}
-                    <div style={{fontSize:18,fontWeight:800,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase'}}>{g.label}</div>
+                    <div style={{fontSize:18,fontWeight:900,letterSpacing:'.05em',color:'var(--ink)',textTransform:'uppercase'}}>{g.label}</div>
                     
                     <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:10,flexWrap:'wrap'}}>
-                      {/* Set value size to 16px */}
-                      <span style={{fontSize:16,color:'var(--muted)',fontFamily:'monospace',fontWeight:600}}>{g.value}</span>
+                      <span style={{fontSize:18,color:'var(--muted)',fontFamily:'monospace',fontWeight:700}}>{g.value}</span>
                       <CopyBtn value={g.value}/>
                     </div>
                   </div>
                 ))}
-                <div style={{paddingTop:16,fontSize:14,color:'var(--muted)',lineHeight:1.6, textAlign: 'center'}}>
-                  Bank of America, N.A. · 222 Broadway, New York, NY 10038
-                </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
